@@ -1,0 +1,13 @@
+# Fichiers bruts lourds (photos et vidéo originales) : seul site/ est publié
+source/
+
+# Python et système
+__pycache__/
+*.pyc
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Secrets
+.env
+.env.*

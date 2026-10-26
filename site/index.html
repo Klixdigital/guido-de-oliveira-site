@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr-BE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guido De Oliveira</title>
+<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  // Va directement à la langue du navigateur (ou au dernier choix), sinon affiche le choix.
+  try {
+    var saved = localStorage.getItem('lang');
+    var nav = (navigator.language || 'fr').slice(0, 2);
+    var l = saved || (['fr', 'nl', 'en'].indexOf(nav) > -1 ? nav : null);
+    if (l) location.replace(l + '/index.html');
+  } catch (e) {}
+</script>
+</head>
+<body>
+<main class="splash">
+  <svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 132 137" fill="currentColor">
+  <path fill-rule="evenodd" d="M10 14 Q66.5 -3 123 14 L123 130 Q66.5 114 10 130 Z M22 25.5 Q42 20 63 18.6 L63 110.6 Q42 111.8 22 116.5 Z M69 18.6 Q90 20 111 25.5 L111 116.5 Q90 111.8 69 110.6 Z"/>
+  <path d="M40 77 L40 62 Q40 56 46 56 L63 56 L63 62 L46 62 L46 77 Z"/>
+  <rect x="89" y="52" width="6" height="25"/>
+</svg>
+  <h1>Guido De Oliveira</h1>
+  <div class="actions"><a class="btn" href="fr/index.html" hreflang="fr">Français</a><a class="btn btn-line" href="nl/index.html" hreflang="nl">Nederlands</a><a class="btn btn-line" href="en/index.html" hreflang="en">English</a></div>
+</main>
+</body>
+</html>
