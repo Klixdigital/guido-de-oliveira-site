@@ -14,16 +14,21 @@ import json
 
 from PIL import Image
 
-from data import FAQ, LIENS, LIVRAISON, OEUVRES, PRINT_FORMATS, SERIES
+from data import (COLLABORATIONS, DISTINCTIONS, EXPOSITIONS, FAQ, LIENS, LIVRAISON, OEUVRES, PRESSE,
+                  PRINT_FORMATS, SERIES)
+from legal import CGV, COURTESY, PRIVACY, UPDATED
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'site'
 LANGS = ['fr', 'nl', 'en']
-PAGES = ['home', 'about', 'gallery', 'prints', 'goodies', 'faq', 'contact', 'cart']
+PAGES = ['home', 'about', 'gallery', 'prints', 'goodies', 'faq', 'contact', 'cart', 'cgv', 'privacy']
 SLUGS = {
-    'fr': {'home': 'index.html', 'about': 'a-propos.html', 'gallery': 'galerie.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'panier.html'},
-    'nl': {'home': 'index.html', 'about': 'over.html', 'gallery': 'galerij.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'winkelmand.html'},
-    'en': {'home': 'index.html', 'about': 'about.html', 'gallery': 'gallery.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'cart.html'},
+    'fr': {'home': 'index.html', 'about': 'a-propos.html', 'gallery': 'galerie.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'panier.html',
+           'cgv': 'conditions-generales-de-vente.html', 'privacy': 'politique-de-confidentialite.html'},
+    'nl': {'home': 'index.html', 'about': 'over.html', 'gallery': 'galerij.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'winkelmand.html',
+           'cgv': 'algemene-verkoopvoorwaarden.html', 'privacy': 'privacybeleid.html'},
+    'en': {'home': 'index.html', 'about': 'about.html', 'gallery': 'gallery.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'cart.html',
+           'cgv': 'terms-of-sale.html', 'privacy': 'privacy-policy.html'},
 }
 HTML_LANG = {'fr': 'fr-BE', 'nl': 'nl-BE', 'en': 'en'}
 
@@ -81,6 +86,9 @@ T = {
         'faq_more': 'Une autre question ?', 'faq_write': 'Écrivez-moi',
         'a_title': 'À propos', 'a_portrait': 'Guido De Oliveira peint dans son atelier, casque sur les oreilles, entouré de ses toiles',
         'a_video': 'Regarder la vidéo',
+        'ex_h': 'Expositions et distinctions', 'ex_shows': 'Expositions collectives', 'ex_awards': 'Distinction',
+        'ex_press': 'Œuvres parues dans', 'ex_collab': 'Collaborations', 'legal': 'Informations légales',
+        'months': ('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'),
         'c_title': 'Contact', 'c_lead': 'Une question sur une œuvre, une commande ou une exposition ? Écrivez-moi.',
         'c_email': 'E-mail', 'c_follow': 'Me suivre', 'c_shops': 'Boutiques', 'c_todo_email': 'Adresse e-mail à fournir',
         'footer_shops': 'Boutiques', 'footer_nav': 'Navigation', 'follow': 'Suivre Guido De Oliveira sur',
@@ -124,6 +132,9 @@ T = {
         'faq_more': 'Nog een vraag?', 'faq_write': 'Schrijf me',
         'a_title': 'Over mij', 'a_portrait': 'Guido De Oliveira schildert in zijn atelier, met een koptelefoon op, omringd door zijn doeken',
         'a_video': 'Bekijk de video',
+        'ex_h': 'Tentoonstellingen en onderscheidingen', 'ex_shows': 'Groepstentoonstellingen', 'ex_awards': 'Onderscheiding',
+        'ex_press': 'Werk verschenen in', 'ex_collab': 'Samenwerkingen', 'legal': 'Juridische informatie',
+        'months': ('januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'),
         'c_title': 'Contact', 'c_lead': 'Een vraag over een werk, een bestelling of een tentoonstelling? Schrijf me.',
         'c_email': 'E-mail', 'c_follow': 'Volg mij', 'c_shops': 'Winkels', 'c_todo_email': 'E-mailadres aan te leveren',
         'footer_shops': 'Winkels', 'footer_nav': 'Navigatie', 'follow': 'Volg Guido De Oliveira op',
@@ -167,6 +178,9 @@ T = {
         'faq_more': 'Another question?', 'faq_write': 'Write to me',
         'a_title': 'About', 'a_portrait': 'Guido De Oliveira painting in his studio, headphones on, surrounded by his canvases',
         'a_video': 'Watch the video',
+        'ex_h': 'Exhibitions and awards', 'ex_shows': 'Group exhibitions', 'ex_awards': 'Award',
+        'ex_press': 'Work featured in', 'ex_collab': 'Collaborations', 'legal': 'Legal information',
+        'months': ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
         'c_title': 'Contact', 'c_lead': 'A question about a work, a commission or an exhibition? Write to me.',
         'c_email': 'Email', 'c_follow': 'Follow me', 'c_shops': 'Shops', 'c_todo_email': 'Email address to be supplied',
         'footer_shops': 'Shops', 'footer_nav': 'Navigation', 'follow': 'Follow Guido De Oliveira on',
@@ -313,6 +327,7 @@ def page(lang, key, title, desc, body):
     </div>
     <div class="footer-bottom">
       <p>© 2026 Guido De Oliveira. {e(t["rights"])}</p>
+      <nav aria-label="{e(t["legal"])}"><ul class="legal-links"><li><a href="{s["cgv"]}">{e(CGV[lang]["title"])}</a></li><li><a href="{s["privacy"]}">{e(PRIVACY[lang]["title"])}</a></li></ul></nav>
       <ul class="langs" aria-label="{e(t["lang_label"])}">{langs}</ul>
     </div>
   </div>
@@ -559,8 +574,89 @@ def about(lang):
     <div class="video-head"><h2>{e(t["video_h"])}</h2><p class="lead">{e(t["video_p"])}</p></div>
     {video_block(lang)}
   </div>
-</section>'''
+</section>
+{exhibitions(lang)}'''
     return page(lang, 'about', f'{t["a_title"]} | Guido De Oliveira', BIO[lang], body)
+
+
+def month_year(d, lang):
+    """'2020-04' -> « avril 2020 »."""
+    y, m = d[:7].split('-')
+    return f'{T[lang]["months"][int(m) - 1]} {y}'
+
+
+def date_range(a, b, lang):
+    """('2020-03-06', '2020-04-06') -> « 6 mars – 6 avril 2020 » (même année : l'année une seule fois)."""
+    da, db = (f'{int(d[8:10])} {month_year(d, lang)}' for d in (a, b))
+    return f'{da.rsplit(" ", 1)[0] if a[:4] == b[:4] else da} – {db}'
+
+
+def exhibitions(lang):
+    """Section « Expositions et distinctions » de la page À propos (la FAQ de l'artiste y renvoie)."""
+    t = T[lang]
+
+    def item(year, main, sub=''):
+        sub = f'<span class="cv-sub">{sub}</span>' if sub else ''
+        return f'<li><span class="cv-year">{year}</span><div><span class="cv-main">{main}</span>{sub}</div></li>'
+
+    def group(title, items):
+        return f'<div class="cv-group"><h3>{e(title)}</h3><ul class="cv-list">{"".join(items)}</ul></div>'
+
+    shows = [item(a[:4], e(name), f'{e(place[lang])} · {date_range(a, b, lang)}') for name, place, a, b in EXPOSITIONS]
+    awards = [item(d[:4], e(txt[lang]), month_year(d, lang)) for txt, d in DISTINCTIONS]
+    press = [item(y, f'<cite>{e(mag)}</cite>') for mag, y in sorted(PRESSE, key=lambda p: -p[1])]
+    collab = ''.join(f'<li>{e(c)}</li>' for c in COLLABORATIONS[lang])
+    return f'''<section class="section" id="expositions">
+  <div class="wrap">
+    <div class="section-head"><h2>{e(t["ex_h"])}</h2></div>
+    <div class="cv">
+      {group(t["ex_shows"], shows)}
+      <div>
+        {group(t["ex_awards"], awards)}
+        {group(t["ex_press"], press)}
+        <div class="cv-group"><h3>{e(t["ex_collab"])}</h3><ul class="cv-plain">{collab}</ul></div>
+      </div>
+    </div>
+  </div>
+</section>'''
+
+
+def legal_page(lang, key, doc):
+    """CGV et politique de confidentialité : textes de l'artiste, dans src/legal.py."""
+    t = T[lang]
+    sep = ' : ' if lang == 'fr' else ': '
+
+    def rich(txt):
+        email = LIENS['email']
+        return (e(txt)
+                .replace('{email}', f'<a class="link" href="mailto:{e(email)}">{e(email)}</a>' if email else todo(t))
+                .replace('{redbubble}', f'<a class="link" {ext("redbubble", t)}>Guiarte SMS (Redbubble)</a>')
+                .replace('{todo}', todo(t)))
+
+    sections = []
+    for h, blocks in doc['sections']:
+        out, items = [], []
+        for b in blocks + [('end',)]:
+            if b[0] == 'li':
+                label = f'<strong>{e(b[1])}</strong>{sep}' if b[1] else ''
+                items.append(f'<li>{label}{rich(b[2])}</li>')
+                continue
+            if items:
+                out.append(f'<ul>{"".join(items)}</ul>')
+                items = []
+            if b[0] == 'p':
+                out.append(f'<p>{rich(b[1])}</p>')
+        sections.append(f'<h2>{e(h)}</h2>{"".join(out)}')
+    note = e(UPDATED[lang])
+    if lang in COURTESY:
+        note += f'<br>{e(COURTESY[lang])} <a class="link" href="../fr/{SLUGS["fr"][key]}" hreflang="fr" lang="fr">Version française</a>'
+    body = f'''
+{head(doc["title"], doc["lead"])}
+<section class="wrap"><div class="legal">
+  <p class="note">{note}</p>
+  {"".join(sections)}
+</div></section>'''
+    return page(lang, key, f'{doc["title"]} | Guido De Oliveira', doc['lead'], body)
 
 
 def contact(lang):
@@ -675,7 +771,9 @@ def cart(lang):
     return page(lang, 'cart', f'{t["cart_title"]} | Guido De Oliveira', t['cart_title'], body)
 
 
-BUILDERS = {'home': home, 'about': about, 'gallery': gallery, 'prints': prints, 'goodies': goodies, 'faq': faq, 'contact': contact, 'cart': cart}
+BUILDERS = {'home': home, 'about': about, 'gallery': gallery, 'prints': prints, 'goodies': goodies, 'faq': faq, 'contact': contact, 'cart': cart,
+            'cgv': lambda lang: legal_page(lang, 'cgv', CGV[lang]),
+            'privacy': lambda lang: legal_page(lang, 'privacy', PRIVACY[lang])}
 
 
 def main():

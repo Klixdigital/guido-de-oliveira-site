@@ -17,7 +17,8 @@ site/                  le site à mettre en ligne tel quel
   assets/js/cart.js    panier (stockage local du navigateur), compteur, commande
   assets/img/oeuvres/  <id>.webp (1600 px max) et <id>-600.webp, proportions d'origine
 source/                bruts hors ligne : photo d'atelier, photos Redbubble du montage goodies (source/goodies/)
-src/data.py            CONTENU : séries, œuvres, liens, formats de prints, FAQ
+src/data.py            CONTENU : séries, œuvres, liens, formats de prints, FAQ, expositions et presse
+src/legal.py           CGV et politique de confidentialité (textes de l'artiste ; NL/EN = traductions de courtoisie)
 src/build.py           gabarits et textes d'interface des 3 langues
 src/images.py          œuvres → WebP, photo d'atelier, photomontage goodies
 ```
@@ -27,7 +28,17 @@ python src/images.py   # après ajout ou remplacement d'une œuvre
 python src/build.py    # (sans -I : le script importe data.py)
 ```
 
-Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact · Panier.
+Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact · Panier. Pied de page : CGV · Politique de confidentialité.
+« À propos » se termine par **Expositions et distinctions** (book 2025 p. 19 + CV).
+
+## Pages légales (2026-11-05)
+
+Reprises des deux .docx de l'artiste, sans rien ajouter de juridique. Écarts, listés en tête de `legal.py` :
+section « Vendeur » ajoutée (adresse et n° d'entreprise « À fournir »), téléphone retiré du contact (aucun sur le
+site), e-mail inséré à la place du `[adresse e-mail de contact]` laissé vide. **À faire valider avant toute vente** :
+la politique parle de comptes clients et de cookies d'analyse que le site n'a pas ; les CGV annoncent la livraison
+offerte dès 75 € HTVA alors que le panier (`LIVRAISON`, valeurs de démo) facture 49 € pour l'UE ; pas d'acceptation
+des CGV au moment de payer (à ajouter quand le paiement sera branché).
 
 ## Ce que l'artiste a demandé (more info/NotesSiteWeb_2.odt)
 
@@ -81,4 +92,5 @@ Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact · Panier.
 Fiche des œuvres (prix, descriptions, histoires, techniques et formats manquants) ; versions HD des 7 petites
 images ; lien Etsy ; service de newsletter ; compte de paiement ; vidéo de présentation pour l'accueil.
 À trancher : retours 15 jours (FAQ) ou 14 jours (CGV) ; Pinterest @atguiarteofficial (notes) ou @guiarteofficial
-(book) ; la FAQ renvoie à une liste d'expositions dans « À propos » et à une rubrique actualités qui n'existent pas.
+(book) ; la FAQ renvoie à une rubrique actualités qui n'existe pas ; expositions 2017-2019 (FAQ) ou 2020 seulement
+(book, CV) ; galerie « Mundoarti » (book) ou « Munduarti » (CV) ; adresse et numéro d'entreprise pour les CGV.

@@ -183,3 +183,32 @@ FAQ = {
         ('Can I view your artworks in person?', 'My works are occasionally featured in exhibitions and galleries. Visit the About page for current and upcoming exhibitions where you can see my work in person.'),
     ],
 }
+
+
+# ── Expositions, distinctions, presse (book 2025 p. 19 et CV ; affiché dans « À propos ») ──
+# Dates au format AAAA-MM-JJ, mises en forme par build.py. La FAQ de l'artiste cite 2017-2019 :
+# rien de tel dans le book ni le CV, donc pas repris ici (à faire préciser par l'artiste).
+EXPOSITIONS = [
+    ('Hotel Casa Palacio Maria-Luisa', {'fr': 'Jerez de la Frontera, Espagne', 'nl': 'Jerez de la Frontera, Spanje',
+                                        'en': 'Jerez de la Frontera, Spain'}, '2020-03-06', '2020-04-06'),
+    ('Hotel Oca Puerta del Camino', {'fr': 'Saint-Jacques-de-Compostelle, Espagne', 'nl': 'Santiago de Compostela, Spanje',
+                                     'en': 'Santiago de Compostela, Spain'}, '2020-09-11', '2020-10-11'),
+    ('Modern & Contemporary Art Show Marbella', {'fr': 'Marbella, Espagne', 'nl': 'Marbella, Spanje',
+                                                 'en': 'Marbella, Spain'}, '2020-10-24', '2020-11-03'),
+]
+
+# « Mundoarti » dans le book, « Munduarti » dans le CV : orthographe du book retenue, à confirmer.
+DISTINCTIONS = [
+    ({'fr': 'Finaliste du 5e Salon de printemps de la peinture réaliste, organisé par les galeries Avatarte (Madrid) '
+            'et Mundoarti (Valence)',
+      'nl': 'Finalist van de 5de Lentesalon van de realistische schilderkunst, georganiseerd door de galerieën '
+            'Avatarte (Madrid) en Mundoarti (Valencia)',
+      'en': 'Finalist, 5th Spring Salon of Realist Painting, organised by the Avatarte (Madrid) and Mundoarti (Valencia) '
+            'galleries'}, '2020-04'),
+]
+
+PRESSE = [('House & Garden', 2017), ('The World of Interiors', 2017), ('Mayfair Life', 2023)]
+
+COLLABORATIONS = {'fr': ['Couverture de livre', 'Single LP'],
+                  'nl': ['Boekomslag', 'Lp-single'],
+                  'en': ['Book cover', 'LP single']}

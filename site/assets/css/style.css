@@ -384,3 +384,25 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
   -webkit-touch-callout: none;
 }
 .zoom, .work-card .frame, .hero-art, .mock, .lightbox { -webkit-touch-callout: none; }
+
+/* À propos : expositions et distinctions (données dans data.py) */
+.cv { display: grid; gap: 3rem; }
+@media (min-width: 900px) { .cv { grid-template-columns: 1fr 1fr; gap: 3rem 5rem; } }
+.cv-group + .cv-group { margin-top: 3rem; }
+.cv-group h3 { font-size: 1rem; color: var(--muted); padding-bottom: 0.7rem; margin-bottom: 1.25rem; border-bottom: 1px solid var(--line); }
+.cv-list, .cv-plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.25rem; }
+.cv-plain { gap: 0.6rem; }
+.cv-list li { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1rem; }
+.cv-year { color: var(--muted); }
+.cv-main { display: block; font-size: 1.1rem; }
+.cv-main cite { font-style: italic; }
+.cv-sub { display: block; margin-top: 0.15rem; color: var(--muted); font-size: 0.95rem; }
+
+/* Pages légales (textes dans legal.py) */
+.legal { max-width: 46rem; padding-bottom: 7rem; }
+.legal h2 { font-size: 1.5rem; margin: 2.75rem 0 0.9rem; }
+.legal ul { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.65rem; }
+.legal p + ul, .legal ul + p, .legal p + p { margin-top: 0.8rem; }
+.legal .note { line-height: 1.6; }
+.footer .legal-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; }
+.footer .legal-links a { color: rgb(255 255 255 / 0.6); }
