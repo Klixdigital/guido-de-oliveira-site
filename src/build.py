@@ -76,6 +76,13 @@ T = {
         'technique': 'Technique', 'dimensions': 'Dimensions', 'year': 'Année', 'story': 'L’histoire de l’œuvre',
         'buy': 'Acquérir l’original', 'see_prints': 'Voir le print', 'available': 'Disponible', 'sold': 'Vendue',
         'mail_subject': 'Original : {t}', 'mail_body': 'Bonjour Guido,\n\nJe souhaite acquérir l’œuvre « {t} » ({y}).\n\n',
+        # Demande d'achat d'un original (fenêtre de la galerie) ; {url} et {img} deviennent des liens complets dans site.js.
+        'inq_intro': 'Je souhaite acquérir l’œuvre originale « {t} ».', 'serie_l': 'Série',
+        'inq_see': 'Voir l’œuvre', 'inq_photo': 'Photo', 'inq_ask': 'Pouvez-vous m’indiquer son prix et les modalités d’achat ?',
+        'inq_bye': 'Cordialement,', 'inq_h': 'Acquérir l’original',
+        'inq_lead': 'Votre demande est prête : elle contient les détails de l’œuvre, son lien et sa photo. Choisissez comment l’envoyer à Guido.',
+        'inq_app': 'Application de messagerie', 'inq_copy': 'Copier le message', 'inq_copied': 'Message copié. Collez-le dans un e-mail à',
+        'inq_or': 'Ou écrivez directement à',
         'zoom': 'Agrandir l’image', 'close': 'Fermer',
         'p_lead': 'Les œuvres de la galerie en tirages d’art signés, sur papier mat 230 g. Commandez en un clic sur Etsy.',
         'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter', 'see_original': 'Voir l’original',
@@ -126,6 +133,12 @@ T = {
         'technique': 'Techniek', 'dimensions': 'Afmetingen', 'year': 'Jaar', 'story': 'Het verhaal achter het werk',
         'buy': 'Het origineel kopen', 'see_prints': 'Bekijk de print', 'available': 'Beschikbaar', 'sold': 'Verkocht',
         'mail_subject': 'Origineel: {t}', 'mail_body': 'Hallo Guido,\n\nIk wil het werk “{t}” ({y}) graag kopen.\n\n',
+        'inq_intro': 'Ik wil het originele werk “{t}” graag kopen.', 'serie_l': 'Reeks',
+        'inq_see': 'Bekijk het werk', 'inq_photo': 'Foto', 'inq_ask': 'Kun je me de prijs en de aankoopvoorwaarden laten weten?',
+        'inq_bye': 'Met vriendelijke groeten,', 'inq_h': 'Het origineel kopen',
+        'inq_lead': 'Je aanvraag staat klaar: met de details van het werk, de link en de foto. Kies hoe je ze naar Guido stuurt.',
+        'inq_app': 'Mailprogramma', 'inq_copy': 'Bericht kopiëren', 'inq_copied': 'Bericht gekopieerd. Plak het in een e-mail aan',
+        'inq_or': 'Of schrijf rechtstreeks naar',
         'zoom': 'Afbeelding vergroten', 'close': 'Sluiten',
         'p_lead': 'De werken uit de galerij als gesigneerde kunstprints op mat papier van 230 g. Bestel met één klik op Etsy.',
         'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen', 'see_original': 'Bekijk het origineel',
@@ -175,6 +188,12 @@ T = {
         'technique': 'Technique', 'dimensions': 'Dimensions', 'year': 'Year', 'story': 'The story behind the work',
         'buy': 'Buy the original', 'see_prints': 'See the print', 'available': 'Available', 'sold': 'Sold',
         'mail_subject': 'Original: {t}', 'mail_body': 'Hello Guido,\n\nI would like to buy “{t}” ({y}).\n\n',
+        'inq_intro': 'I would like to buy the original work “{t}”.', 'serie_l': 'Series',
+        'inq_see': 'See the work', 'inq_photo': 'Photo', 'inq_ask': 'Could you let me know its price and how to proceed?',
+        'inq_bye': 'Kind regards,', 'inq_h': 'Buy the original',
+        'inq_lead': 'Your request is ready: it includes the details of the work, its link and its photo. Choose how to send it to Guido.',
+        'inq_app': 'Email app', 'inq_copy': 'Copy the message', 'inq_copied': 'Message copied. Paste it into an email to',
+        'inq_or': 'Or write directly to',
         'zoom': 'Enlarge image', 'close': 'Close',
         'p_lead': 'The works from the gallery as signed art prints on 230 g matte paper. Order in one click on Etsy.',
         'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy', 'see_original': 'See the original',
@@ -417,14 +436,46 @@ def work_card(o, lang, href):
   <p>{" — ".join(meta)}</p></a></li>'''
 
 
+def inquiry_dialog(lang):
+    """Fenêtre « Acquérir l'original » : la demande pré-remplie, à envoyer par le moyen du visiteur."""
+    t = T[lang]
+    email = e(LIENS['email'] or '')
+    return f'''<dialog class="inquire" aria-labelledby="inq-h">
+  <div class="inq-work"><img src="" alt="" width="96" height="96"><div><p class="kicker">{e(t["inq_h"])}</p><h2 id="inq-h"></h2><p class="inq-meta"></p></div></div>
+  <p class="inq-lead">{e(t["inq_lead"])}</p>
+  <div class="inq-actions">
+    <a class="btn" data-inq="gmail" target="_blank" rel="noopener">Gmail</a>
+    <a class="btn btn-line" data-inq="outlook" target="_blank" rel="noopener">Outlook</a>
+    <a class="btn btn-line" data-inq="app">{e(t["inq_app"])}</a>
+    <button type="button" class="btn btn-line" data-inq="copy">{e(t["inq_copy"])}</button>
+  </div>
+  <p class="inq-copied" role="status" hidden>{e(t["inq_copied"])} <strong>{email}</strong></p>
+  <p class="note">{e(t["inq_or"])} <a class="link" href="mailto:{email}">{email}</a></p>
+  <button type="button" class="inq-close link">{e(t["close"])}</button>
+</dialog>'''
+
+
 def buy_mail(o, lang):
     """Sans prix en ligne, l'achat passe par un e-mail pré-rempli à l'artiste."""
     t = T[lang]
     subject = t['mail_subject'].format(t=o['titre'])
     body = t['mail_body'].format(t=o['titre'], y=o['annee'] or '').replace(' ()', '')
-    if LIENS['email']:
-        return f'href="mailto:{LIENS["email"]}?subject={quote(subject)}&amp;body={quote(body)}"'
-    return f'href="{SLUGS[lang]["contact"]}"'
+    if not LIENS['email']:
+        return f'href="{SLUGS[lang]["contact"]}"'
+    # Sans JavaScript : simple lien e-mail. Avec : site.js ouvre la fenêtre de demande (Gmail, Outlook, appli, copie),
+    # car un lien mailto ne fait rien sur un ordinateur sans logiciel de messagerie configuré.
+    sep = ' : ' if lang == 'fr' else ': '
+    details = [(t['serie_l'], series_name(o['serie'], lang)), (t['year'], o['annee']),
+               (t['technique'], o['tech'] and o['tech'][lang]), (t['dimensions'], o['dim'])]
+    lines = [t['mail_body'].split('\n')[0], '', t['inq_intro'].format(t=o['titre']), '']
+    lines += [f'{k}{sep}{v}' for k, v in details if v]
+    if o['desc']:
+        lines += ['', o['desc'][lang]]
+    lines += ['', f'{t["inq_see"]}{sep}{{url}}', f'{t["inq_photo"]}{sep}{{img}}', '', t['inq_ask'], '', t['inq_bye']]
+    meta = ' · '.join(str(v) for _, v in details if v)
+    return (f'href="mailto:{LIENS["email"]}?subject={quote(subject)}&amp;body={quote(body)}" data-inquire="{o["id"]}" '
+            f'data-to="{e(LIENS["email"])}" data-subject="{e(subject)}" data-body="{e(chr(10).join(lines))}" '
+            f'data-title="{e(o["titre"])}" data-meta="{e(meta)}" data-img="{img(o, "-600")}"')
 
 
 def home(lang):
@@ -519,7 +570,8 @@ def gallery(lang):
 {head(t["g_title"], t["g_lead"])}
 <nav class="years" aria-label="{e(t["g_years"])}"><div class="wrap"><ul>{nav}</ul></div></nav>
 {"".join(sections)}
-<dialog class="lightbox"><img src="" alt=""><button type="button">{e(t["close"])}</button></dialog>'''
+<dialog class="lightbox"><img src="" alt=""><button type="button">{e(t["close"])}</button></dialog>
+{inquiry_dialog(lang)}'''
     return page(lang, 'gallery', f'{t["g_title"]} | Guido De Oliveira', t['g_lead'], body)
 
 

@@ -71,6 +71,11 @@ des CGV au moment de payer (à ajouter quand le paiement sera branché).
 
 - Une œuvre **avec prix** : « Ajouter au panier » et « Acheter maintenant » ; vendue = non ajoutable ; une seule fois
   dans le panier (pièce unique). Une œuvre **sans prix** n'entre pas dans le panier.
+- « Acquérir l'original » (œuvre sans prix) ouvre une **fenêtre** (`inquiry_dialog` + `site.js`) : Gmail, Outlook,
+  appli de messagerie ou copie du message. Un simple lien mailto ne faisait rien sur un PC sans logiciel de
+  messagerie configuré. Le message reprend série, année, technique, format, description si fournie, lien de l'œuvre
+  et lien de sa photo (un e-mail ne peut pas joindre d'image par lien ; une vraie photo jointe demanderait un
+  service d'envoi de formulaire, à décider avec la newsletter).
 - Paiement : `LIENS['checkout']` dans `data.py`. Vide = **mode démonstration** (commande simulée, bandeau jaune).
   Les CGV de l'artiste prévoient Stripe.
 - Prints → Etsy (lien à venir), goodies → Redbubble (boutique Guiarte SMS).

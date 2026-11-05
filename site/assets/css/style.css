@@ -413,3 +413,20 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .consent { max-width: 38rem; margin: 0; }
 /* Montage goodies carré (16 produits, 4 × 4) : largeur limitée pour ne pas dépasser l'écran en hauteur */
 .goodies-montage { max-width: 46rem; }
+
+/* Fenêtre « Acquérir l'original » (galerie) */
+.inquire { width: min(94vw, 34rem); padding: 2rem; border: 0; border-radius: 2px; background: #fff; color: var(--ink); box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.45); }
+.inquire::backdrop { background: rgb(14 14 13 / 0.6); }
+.inq-work { display: grid; grid-template-columns: 6rem 1fr; gap: 1.25rem; align-items: center; }
+.inq-work img { width: 6rem; height: 6rem; object-fit: contain; background: var(--wall); pointer-events: none; user-select: none; -webkit-user-drag: none; -webkit-touch-callout: none; }
+.inq-work h2 { font-size: 1.6rem; line-height: 1.2; }
+.inq-work .kicker { margin: 0 0 0.2rem; }
+.inq-meta { margin-top: 0.3rem; color: var(--muted); font-size: 0.95rem; }
+.inq-lead { margin: 1.5rem 0 1.25rem; }
+.inq-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.inq-actions .btn { justify-content: center; text-align: center; }
+.inq-copied { margin-top: 1rem; padding: 0.75rem 1rem; border-left: 3px solid var(--jungle); background: var(--wall); }
+.inq-copied[hidden] { display: none; }
+.inquire .note { margin-top: 1.25rem; }
+.inq-close { margin-top: 1rem; padding: 0; border: 0; background: none; font: inherit; color: var(--muted); cursor: pointer; text-decoration: underline; }
+@media (max-width: 480px) { .inquire { padding: 1.5rem; } .inq-actions { grid-template-columns: 1fr; } }

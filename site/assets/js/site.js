@@ -46,7 +46,7 @@
 
   // Œuvres : pas de clic droit ni de glisser-déposer (demande de l'artiste).
   // Dissuasif seulement ; la vraie protection est le filigrane intégré aux images.
-  var ART = '.zoom, .work-card .frame, .hero-art, .mock, .lightbox';
+  var ART = '.zoom, .work-card .frame, .hero-art, .mock, .lightbox, .inq-work';
   ['contextmenu', 'dragstart'].forEach(function (type) {
     document.addEventListener(type, function (e) {
       if (e.target.closest && e.target.closest(ART)) e.preventDefault();
@@ -67,6 +67,44 @@
     });
     box.querySelector('button').addEventListener('click', function () { box.close(); });
     box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
+  }
+
+  // « Acquérir l'original » : un lien mailto ne fait rien sans logiciel de messagerie configuré.
+  // On ouvre donc une fenêtre qui propose Gmail, Outlook, l'appli de messagerie ou la copie du message.
+  // Un e-mail ne peut pas joindre d'image par lien : le message contient le lien de l'œuvre et celui de sa photo.
+  var inq = document.querySelector('dialog.inquire');
+  if (inq && inq.showModal) {
+    var enc = encodeURIComponent, msg = {};
+    var copied = inq.querySelector('.inq-copied');
+    document.querySelectorAll('[data-inquire]').forEach(function (a) {
+      a.addEventListener('click', function (ev) {
+        ev.preventDefault();
+        var page = location.origin + location.pathname;
+        msg.to = a.getAttribute('data-to');
+        msg.subject = a.getAttribute('data-subject');
+        msg.body = a.getAttribute('data-body')
+          .replace('{url}', page + '#' + a.getAttribute('data-inquire'))
+          .replace('{img}', new URL(a.getAttribute('data-img'), location.href).href);
+        var q = '&subject=' + enc(msg.subject) + '&body=' + enc(msg.body);
+        inq.querySelector('[data-inq="gmail"]').href = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + enc(msg.to) + '&su=' + enc(msg.subject) + '&body=' + enc(msg.body);
+        inq.querySelector('[data-inq="outlook"]').href = 'https://outlook.live.com/mail/0/deeplink/compose?to=' + enc(msg.to) + q;
+        inq.querySelector('[data-inq="app"]').href = 'mailto:' + msg.to + '?' + q.slice(1);
+        var thumb = inq.querySelector('.inq-work img');
+        thumb.src = a.getAttribute('data-img');
+        thumb.alt = '';
+        inq.querySelector('#inq-h').textContent = a.getAttribute('data-title');
+        inq.querySelector('.inq-meta').textContent = a.getAttribute('data-meta');
+        copied.hidden = true;
+        inq.showModal();
+      });
+    });
+    inq.querySelector('[data-inq="copy"]').addEventListener('click', function () {
+      var text = msg.subject + '\n\n' + msg.body;
+      var ok = function () { copied.hidden = false; };
+      if (navigator.clipboard) navigator.clipboard.writeText(text).then(ok, ok);
+    });
+    inq.querySelector('.inq-close').addEventListener('click', function () { inq.close(); });
+    inq.addEventListener('click', function (e) { if (e.target === inq) inq.close(); });
   }
 
   // Galerie : l'année à l'écran est soulignée dans la barre des années
