@@ -102,6 +102,11 @@
     });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      // Piège à robots : champ invisible pour un humain. Rempli = robot, on fait semblant d'accepter sans rien envoyer.
+      if (form.elements.website && form.elements.website.value) {
+        form.querySelector('.form-ok').hidden = false;
+        return;
+      }
       var okName = check('name'), okEmail = check('email');
       if (!okName) { form.elements.name.focus(); return; }
       if (!okEmail) { form.elements.email.focus(); return; }

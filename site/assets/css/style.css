@@ -406,3 +406,8 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .legal .note { line-height: 1.6; }
 .footer .legal-links { display: flex; flex-wrap: wrap; gap: 0.4rem 1.25rem; }
 .footer .legal-links a { color: rgb(255 255 255 / 0.6); }
+
+/* Newsletter : piège à robots hors écran (pas display:none, que certains robots repèrent), consentement */
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form { position: relative; }
+.consent { max-width: 38rem; margin: 0; }

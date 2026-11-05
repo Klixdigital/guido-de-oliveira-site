@@ -70,7 +70,8 @@ T = {
         'news_h': 'Recevoir la newsletter', 'news_p': 'Nouvelles œuvres, expositions et sorties de prints, directement dans votre boîte mail.',
         'f_name': 'Nom', 'f_email': 'E-mail', 'f_submit': 'S’inscrire', 'f_err_name': 'Indiquez votre nom.',
         'f_err_email': 'Indiquez une adresse e-mail valide.', 'f_ok': 'Merci ! Votre inscription est bien prise en compte.',
-        'f_note': 'Vous pouvez vous désinscrire à tout moment.', 'f_subject': 'Inscription à la newsletter',
+        'f_note': 'Vous pouvez vous désinscrire à tout moment.',
+        'f_consent': 'En vous inscrivant, vous acceptez de recevoir la newsletter de Guido De Oliveira par e-mail.','f_subject': 'Inscription à la newsletter',
         'g_title': 'Galerie', 'g_lead': 'Les œuvres originales, classées par série.', 'g_years': 'Séries', 'todo': 'À fournir', 'price_todo': 'Prix à fournir',
         'technique': 'Technique', 'dimensions': 'Dimensions', 'year': 'Année', 'story': 'L’histoire de l’œuvre',
         'buy': 'Acquérir l’original', 'see_prints': 'Voir le print', 'available': 'Disponible', 'sold': 'Vendue',
@@ -116,7 +117,8 @@ T = {
         'news_h': 'Schrijf je in op de nieuwsbrief', 'news_p': 'Nieuwe werken, tentoonstellingen en nieuwe prints, rechtstreeks in je mailbox.',
         'f_name': 'Naam', 'f_email': 'E-mail', 'f_submit': 'Inschrijven', 'f_err_name': 'Vul je naam in.',
         'f_err_email': 'Vul een geldig e-mailadres in.', 'f_ok': 'Bedankt! Je inschrijving is genoteerd.',
-        'f_note': 'Je kunt je op elk moment uitschrijven.', 'f_subject': 'Inschrijving nieuwsbrief',
+        'f_note': 'Je kunt je op elk moment uitschrijven.',
+        'f_consent': 'Door je in te schrijven, ga je ermee akkoord de nieuwsbrief van Guido De Oliveira per e-mail te ontvangen.','f_subject': 'Inschrijving nieuwsbrief',
         'g_title': 'Galerij', 'g_lead': 'De originele werken, per reeks.', 'g_years': 'Reeksen', 'todo': 'Aan te leveren', 'price_todo': 'Prijs aan te leveren',
         'technique': 'Techniek', 'dimensions': 'Afmetingen', 'year': 'Jaar', 'story': 'Het verhaal achter het werk',
         'buy': 'Het origineel kopen', 'see_prints': 'Bekijk de print', 'available': 'Beschikbaar', 'sold': 'Verkocht',
@@ -162,7 +164,8 @@ T = {
         'news_h': 'Join the newsletter', 'news_p': 'New works, exhibitions and print releases, straight to your inbox.',
         'f_name': 'Name', 'f_email': 'Email', 'f_submit': 'Subscribe', 'f_err_name': 'Please enter your name.',
         'f_err_email': 'Please enter a valid email address.', 'f_ok': 'Thank you! You’re on the list.',
-        'f_note': 'You can unsubscribe at any time.', 'f_subject': 'Newsletter subscription',
+        'f_note': 'You can unsubscribe at any time.',
+        'f_consent': 'By subscribing, you agree to receive Guido De Oliveira’s newsletter by email.','f_subject': 'Newsletter subscription',
         'g_title': 'Gallery', 'g_lead': 'The original works, by series.', 'g_years': 'Series', 'todo': 'To be supplied', 'price_todo': 'Price to be supplied',
         'technique': 'Technique', 'dimensions': 'Dimensions', 'year': 'Year', 'story': 'The story behind the work',
         'buy': 'Buy the original', 'see_prints': 'See the print', 'available': 'Available', 'sold': 'Sold',
@@ -366,7 +369,9 @@ def newsletter(lang, idp):
     <div class="field"><label for="{idp}-name">{e(t["f_name"])}</label><input id="{idp}-name" name="name" type="text" autocomplete="name" required><p class="error" hidden>{e(t["f_err_name"])}</p></div>
     <div class="field"><label for="{idp}-email">{e(t["f_email"])}</label><input id="{idp}-email" name="email" type="email" autocomplete="email" required><p class="error" hidden>{e(t["f_err_email"])}</p></div>
   </div>
-  <div class="actions form-actions"><button class="btn" type="submit">{e(t["f_submit"])}</button><p class="note">{e(t["f_note"])}</p></div>
+  <div class="hp" aria-hidden="true"><label for="{idp}-website">Website</label><input id="{idp}-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+  <div class="actions form-actions"><button class="btn" type="submit">{e(t["f_submit"])}</button></div>
+  <p class="note consent">{e(t["f_consent"])} {e(t["f_note"])} <a class="link" href="{SLUGS[lang]["privacy"]}">{e(PRIVACY[lang]["title"])}</a></p>
   <p class="form-ok" role="status" hidden>{e(t["f_ok"])}</p>
 </form>'''
 

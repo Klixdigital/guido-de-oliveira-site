@@ -10,6 +10,8 @@ la version française prévaut (mention affichée sur ces pages).
 - CGV, « Contact » : e-mail du site au lieu de « l'adresse électronique ou le numéro de téléphone fournis
   sur le site », aucun téléphone n'y figurant.
 - Confidentialité : « [adresse e-mail de contact] » remplacé par l'e-mail du site.
+- Confidentialité, section « Newsletter » ajoutée (2026-11-05) : le site a un formulaire d'inscription,
+  le document de l'artiste n'en parlait pas.
 
 Balises dans les textes : {email} et {redbubble} deviennent des liens, {todo} la mention « À fournir ».
 Blocs : ('p', texte) ou ('li', intitulé ou None, texte) ; les 'li' qui se suivent forment une liste.
@@ -256,6 +258,11 @@ PRIVACY = {
                 ('li', None, 'communiquer avec vous au sujet de vos commandes, de nos produits et de nos offres spéciales ;'),
                 ('li', None, 'respecter nos obligations légales et réglementaires.'),
             ]),
+            ('Newsletter', [
+                ('p', 'Si vous vous inscrivez à la newsletter, nous conservons votre nom et votre adresse e-mail dans le '
+                 'seul but de vous l’envoyer : nouvelles œuvres, expositions et sorties de prints. Vous pouvez vous '
+                 'désinscrire à tout moment, sur simple demande à {email} ; votre adresse est alors retirée de la liste.'),
+            ]),
             ('Partage des informations', [
                 ('p', 'Nous nous engageons à ne pas vendre, échanger ou louer vos informations personnelles à des tiers. '
                  'Nous pouvons cependant partager vos données avec des partenaires de confiance pour :'),
@@ -319,6 +326,11 @@ PRIVACY = {
                 ('li', None, 'met je te communiceren over je bestellingen, onze producten en onze speciale aanbiedingen;'),
                 ('li', None, 'onze wettelijke en reglementaire verplichtingen na te komen.'),
             ]),
+            ('Nieuwsbrief', [
+                ('p', 'Als je je inschrijft op de nieuwsbrief, bewaren wij je naam en e-mailadres met als enig doel je '
+                 'de nieuwsbrief te sturen: nieuwe werken, tentoonstellingen en nieuwe prints. Je kunt je op elk moment '
+                 'uitschrijven door een eenvoudig verzoek naar {email} te sturen; je adres wordt dan van de lijst verwijderd.'),
+            ]),
             ('Delen van gegevens', [
                 ('p', 'Wij verbinden ons ertoe je persoonsgegevens niet te verkopen, te ruilen of te verhuren aan derden. '
                  'Wij kunnen je gegevens wel delen met betrouwbare partners om:'),
@@ -377,6 +389,11 @@ PRIVACY = {
                 ('li', None, 'improve our website and personalise your shopping experience;'),
                 ('li', None, 'communicate with you about your orders, our products and our special offers;'),
                 ('li', None, 'comply with our legal and regulatory obligations.'),
+            ]),
+            ('Newsletter', [
+                ('p', 'If you subscribe to the newsletter, we keep your name and email address for the sole purpose of '
+                 'sending it to you: new works, exhibitions and print releases. You can unsubscribe at any time by simply '
+                 'writing to {email}; your address is then removed from the list.'),
             ]),
             ('Sharing your information', [
                 ('p', 'We undertake not to sell, trade or rent your personal information to third parties. We may, however, '
