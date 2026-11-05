@@ -48,6 +48,11 @@ des CGV au moment de payer (à ajouter quand le paiement sera branché).
 - **Prints** : bouton « Acheter » (pas « Acheter sur Etsy ») ; formats Petit 30×40 / Moyen 40×50 / Grand 45×61 /
   Très grand 61×81, prix « à partir de », provisoires.
 - **Goodies** : un seul photomontage de ses produits Redbubble puis le lien vers la boutique, pas de catalogue.
+  Montage refait le 2026-11-05 depuis sa boutique (150 motifs, 169 produits) : 16 produits réels, un par catégorie,
+  uniquement ses propres œuvres ; le texte liste toutes les catégories en vente, sans prix (ils changent avec les
+  promos Redbubble). Pas de sac à dos dans sa boutique, contrairement à ses notes. Ancien montage gardé dans
+  `source/goodies-ancien-2026-11-05/`. Sa boutique contient aussi du fan art (Star Wars, Iron Man, Shaun le mouton) :
+  ne jamais le montrer sur le site (droits de Disney, Marvel, Aardman).
 - **Contact** : info@guidodeoliveira.com ; Instagram, TikTok, YouTube @guiarteofficial ; Pinterest ; pas de Facebook.
 
 ## État du contenu

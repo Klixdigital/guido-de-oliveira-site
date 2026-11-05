@@ -7,8 +7,8 @@
   de 500 px reste à 500 px. Filigrane : logo + « © Guido De Oliveira » en coin partout, grand logo pâle au centre
   de la vue agrandie ; droits d'auteur dans les métadonnées. Police : source/fonts/Philosopher-Regular.ttf.
 - Atelier : source/raw-atelier-reel.webp (Mepainting.webp de l'artiste) → assets/img/atelier.webp
-- Goodies : source/goodies/*.jpg (photos de sa boutique Redbubble, 600 × 600) → assets/img/goodies.webp,
-  photomontage de 4 colonnes dans l'ordre des noms de fichiers.
+- Goodies : source/goodies/* (photos de sa boutique Redbubble, 600 × 600, une par catégorie de produit,
+  relevées le 2026-11-05) → assets/img/goodies.webp, photomontage de 4 colonnes dans l'ordre des noms de fichiers.
 """
 from functools import lru_cache
 from pathlib import Path
@@ -105,7 +105,7 @@ def atelier():
 
 
 def goodies(cols=4, tile=600, gap=12, bg=(244, 243, 241)):
-    tiles = sorted((ROOT / 'source' / 'goodies').glob('*.jpg'))
+    tiles = sorted(p for p in (ROOT / 'source' / 'goodies').iterdir() if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'))
     if not tiles:
         return
     rows = -(-len(tiles) // cols)

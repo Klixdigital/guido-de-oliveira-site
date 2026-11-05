@@ -79,7 +79,10 @@ T = {
         'zoom': 'Agrandir l’image', 'close': 'Fermer',
         'p_lead': 'Les œuvres de la galerie en tirages d’art signés, sur papier mat 230 g. Commandez en un clic sur Etsy.',
         'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter', 'see_original': 'Voir l’original',
-        'gd_lead': 'Mugs, t-shirts et sweats, stickers, posters, tote bags, sacs à dos, coussins… Les œuvres en objets du quotidien, imprimés et livrés par Redbubble.', 'gd_alt': 'Photomontage de produits de la boutique Guiarte SMS : coussin, t-shirts, mugs, sweats, stickers, tote bag, poster et casquette décorés des œuvres de Guido De Oliveira', 'gd_go': 'Voir la boutique sur Redbubble', 'gd_note': 'Plus de 130 créations, de nouveaux designs chaque mois.',
+        # Catégories et nombre de motifs relevés sur sa boutique Redbubble le 2026-11-05 (150 motifs, 169 produits).
+        'gd_lead': 'T-shirts, sweats et vestes à capuche, stickers, posters, impressions artistiques et photo, toiles, mugs, coussins, coques de téléphone, tapis de souris, carnets, tote bags, pochettes, casquettes et bobs, chaussettes, magnets et badges : les œuvres en objets du quotidien, imprimés et livrés par Redbubble.',
+        'gd_alt': 'Photomontage de 16 produits de la boutique Guiarte SMS décorés des œuvres de Guido De Oliveira : t-shirt, mug, poster, sticker, coussin, veste à capuche, coque de téléphone, impression artistique, tote bag, casquette, tapis de souris, toile, carnet, chaussettes, magnet et bob',
+        'gd_go': 'Voir la boutique sur Redbubble', 'gd_note': 'Plus de 150 motifs dans la boutique Guiarte SMS.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Pulls', 'cadre': 'Cadres'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Pull à capuche', 'cadre': 'Cadre'},
         'buy_rb': 'Acheter sur Redbubble',
@@ -126,7 +129,9 @@ T = {
         'zoom': 'Afbeelding vergroten', 'close': 'Sluiten',
         'p_lead': 'De werken uit de galerij als gesigneerde kunstprints op mat papier van 230 g. Bestel met één klik op Etsy.',
         'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen', 'see_original': 'Bekijk het origineel',
-        'gd_lead': 'Mokken, T-shirts en sweaters, stickers, posters, draagtassen, rugzakken, kussens… De werken als alledaagse voorwerpen, gedrukt en geleverd door Redbubble.', 'gd_alt': 'Fotomontage van producten uit de winkel Guiarte SMS: kussen, T-shirts, mokken, sweaters, stickers, draagtas, poster en pet met de werken van Guido De Oliveira', 'gd_go': 'Bekijk de winkel op Redbubble', 'gd_note': 'Meer dan 130 creaties, elke maand nieuwe ontwerpen.',
+        'gd_lead': 'T-shirts, sweaters en hoodies met rits, stickers, posters, kunst- en fotoprints, canvasprints, mokken, kussens, telefoonhoesjes, muismatten, notitieboeken, draagtassen, etuis, petten en bucket hats, sokken, magneten en buttons: de werken als alledaagse voorwerpen, gedrukt en geleverd door Redbubble.',
+        'gd_alt': 'Fotomontage van 16 producten uit de winkel Guiarte SMS met de werken van Guido De Oliveira: T-shirt, mok, poster, sticker, kussen, hoodie met rits, telefoonhoesje, kunstprint, draagtas, pet, muismat, canvasprint, notitieboek, sokken, magneet en bucket hat',
+        'gd_go': 'Bekijk de winkel op Redbubble', 'gd_note': 'Meer dan 150 ontwerpen in de winkel Guiarte SMS.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Truien', 'cadre': 'Kaders'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Hoodie', 'cadre': 'Kader'},
         'buy_rb': 'Kopen op Redbubble',
@@ -173,7 +178,9 @@ T = {
         'zoom': 'Enlarge image', 'close': 'Close',
         'p_lead': 'The works from the gallery as signed art prints on 230 g matte paper. Order in one click on Etsy.',
         'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy', 'see_original': 'See the original',
-        'gd_lead': 'Mugs, T-shirts and sweatshirts, stickers, posters, tote bags, backpacks, cushions… The works on everyday objects, printed and shipped by Redbubble.', 'gd_alt': 'Photo montage of products from the Guiarte SMS shop: cushion, T-shirts, mugs, sweatshirts, stickers, tote bag, poster and cap featuring Guido De Oliveira’s works', 'gd_go': 'Visit the shop on Redbubble', 'gd_note': 'Over 130 designs, with new ones every month.',
+        'gd_lead': 'T-shirts, sweatshirts and zip hoodies, stickers, posters, art and photo prints, canvas prints, mugs, cushions, phone cases, mouse pads, notebooks, tote bags, pouches, caps and bucket hats, socks, magnets and badges: the works on everyday objects, printed and shipped by Redbubble.',
+        'gd_alt': 'Photo montage of 16 products from the Guiarte SMS shop featuring Guido De Oliveira’s works: T-shirt, mug, poster, sticker, cushion, zip hoodie, phone case, art print, tote bag, cap, mouse pad, canvas print, notebook, socks, magnet and bucket hat',
+        'gd_go': 'Visit the shop on Redbubble', 'gd_note': 'Over 150 designs in the Guiarte SMS shop.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Hoodies', 'cadre': 'Frames'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Hoodie', 'cadre': 'Frame'},
         'buy_rb': 'Buy on Redbubble',
@@ -457,7 +464,7 @@ def home(lang):
     </a>
     <a class="shop shop-alt" href="{s["goodies"]}">
       <div><h3>{e(t["nav"]["goodies"])}</h3><p>{e(t["goodies_p"])}</p></div>
-      <div class="shop-visual"><img class="shop-montage" src="../assets/img/goodies-800.webp" width="800" height="599" alt="{e(t["gd_alt"])}" loading="lazy"></div>
+      <div class="shop-visual"><img class="shop-montage" src="../assets/img/goodies-800.webp" width="800" height="800" alt="{e(t["gd_alt"])}" loading="lazy"></div>
       <span class="go">{e(t["goodies_go"])}</span>
     </a>
   </div>
@@ -538,7 +545,7 @@ def goodies(lang):
     body = f'''
 {head(t["nav"]["goodies"], t["gd_lead"])}
 <section class="wrap goodies-shop">
-  <a class="goodies-montage" {ext("redbubble", t)}><img src="../assets/img/goodies.webp" srcset="../assets/img/goodies-800.webp 800w, ../assets/img/goodies.webp 1600w" sizes="(min-width: 1250px) 73rem, 100vw" width="1600" height="1198" alt="{e(t["gd_alt"])}"></a>
+  <a class="goodies-montage" {ext("redbubble", t)}><img src="../assets/img/goodies.webp" srcset="../assets/img/goodies-800.webp 800w, ../assets/img/goodies.webp 1600w" sizes="(min-width: 900px) 46rem, 100vw" width="1600" height="1600" alt="{e(t["gd_alt"])}"></a>
   <div class="goodies-cta">
     <a class="btn" {ext("redbubble", t)}>{e(t["gd_go"])}</a>
     <p class="note">{e(t["gd_note"])}</p>

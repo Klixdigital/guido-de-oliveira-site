@@ -411,3 +411,5 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form { position: relative; }
 .consent { max-width: 38rem; margin: 0; }
+/* Montage goodies carré (16 produits, 4 × 4) : largeur limitée pour ne pas dépasser l'écran en hauteur */
+.goodies-montage { max-width: 46rem; }
