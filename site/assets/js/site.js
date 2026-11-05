@@ -44,6 +44,15 @@
     toast._t = setTimeout(function () { toast.hidden = true; }, 2600);
   });
 
+  // Œuvres : pas de clic droit ni de glisser-déposer (demande de l'artiste).
+  // Dissuasif seulement ; la vraie protection est le filigrane intégré aux images.
+  var ART = '.zoom, .work-card .frame, .hero-art, .mock, .lightbox';
+  ['contextmenu', 'dragstart'].forEach(function (type) {
+    document.addEventListener(type, function (e) {
+      if (e.target.closest && e.target.closest(ART)) e.preventDefault();
+    });
+  });
+
   // Zoom des œuvres
   var box = document.querySelector('.lightbox');
   if (box && box.showModal) {

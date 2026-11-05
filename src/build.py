@@ -12,7 +12,9 @@ from urllib.parse import quote
 
 import json
 
-from data import FAQ, GOODIES, LIENS, LIVRAISON, OEUVRES, PRINT_FORMATS
+from PIL import Image
+
+from data import FAQ, LIENS, LIVRAISON, OEUVRES, PRINT_FORMATS, SERIES
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'site'
@@ -25,11 +27,19 @@ SLUGS = {
 }
 HTML_LANG = {'fr': 'fr-BE', 'nl': 'nl-BE', 'en': 'en'}
 
-# Phrase de l'ancien site (EN, verbatim) ; FR et NL traduits par nos soins, à faire valider.
+# Textes de l'artiste (NotesSiteWeb_2, 2026-11-05) : FR fourni ; NL et EN traduits par nos soins, à faire valider.
+TAGLINE = ('The Art of', 'Guido De Oliveira.')  # en anglais dans les trois langues, comme sur l'ancien site
+
+INTRO = {
+    'fr': 'À travers notre histoire en tant que civilisation et l’incertitude du futur, la vie sauvage, des objets chargés de mémoire et des visions cosmiques, Guido de Oliveira explore la relation entre l’humain, la nature et un monde en constante transformation. Ses œuvres invitent à être témoin de sa vision du monde tout en éveillant une réflexion sur le climat, les effets de l’activité humaine et la fragilité du vivant.',
+    'nl': 'Via onze geschiedenis als beschaving en de onzekerheid van de toekomst, via het wilde leven, voorwerpen beladen met herinneringen en kosmische visioenen, verkent Guido de Oliveira de relatie tussen de mens, de natuur en een wereld die voortdurend verandert. Zijn werken nodigen uit om getuige te zijn van zijn kijk op de wereld en zetten aan tot nadenken over het klimaat, de gevolgen van menselijk handelen en de kwetsbaarheid van het leven.',
+    'en': 'Through our history as a civilisation and the uncertainty of the future, through wildlife, objects charged with memory and cosmic visions, Guido de Oliveira explores the relationship between humankind, nature and a world in constant transformation. His works invite you to witness his vision of the world while prompting reflection on the climate, the effects of human activity and the fragility of life.',
+}
+
 BIO = {
-    'en': 'He grew up in Belgium within a multicultural family and cosmopolite atmosphere, which had a deep impact on his way of approaching art in its most varied alternatives, proof of the passion he uses at GUIARTE.',
-    'fr': 'Il a grandi en Belgique, au sein d’une famille multiculturelle et dans une atmosphère cosmopolite, ce qui a profondément marqué sa façon d’aborder l’art sous ses formes les plus variées : la preuve de la passion qu’il met dans GUIARTE.',
-    'nl': 'Hij groeide op in België, in een multiculturele familie en een kosmopolitische sfeer. Dat tekende diep zijn manier om kunst in al haar vormen te benaderen, het bewijs van de passie die hij in GUIARTE legt.',
+    'fr': 'Né en 1976, Guido de Oliveira est un artiste peintre d’origine portugaise, avec des racines allemandes, aujourd’hui basé à Bruxelles. Sa pratique s’est construite depuis l’enfance au contact de l’aquarelle, de l’acrylique et d’un apprentissage constant par l’expérimentation. Ses voyages et ses influences, du surréalisme à l’hyperréalisme, nourrissent un univers personnel où se rencontrent précision, imaginaire et sensibilité. Il développe une pratique professionnelle depuis 2015.',
+    'nl': 'Guido de Oliveira, geboren in 1976, is een kunstschilder van Portugese afkomst met Duitse wortels, die vandaag in Brussel woont. Zijn praktijk groeide sinds zijn kindertijd met aquarel, acryl en een voortdurend leren door te experimenteren. Zijn reizen en invloeden, van het surrealisme tot het hyperrealisme, voeden een persoonlijke wereld waarin precisie, verbeelding en gevoeligheid elkaar ontmoeten. Sinds 2015 werkt hij als professioneel kunstenaar.',
+    'en': 'Born in 1976, Guido de Oliveira is a painter of Portuguese origin with German roots, now based in Brussels. His practice has been shaped since childhood by watercolour, acrylic and constant learning through experimentation. His travels and influences, from surrealism to hyperrealism, feed a personal world where precision, imagination and sensitivity meet. He has worked as a professional artist since 2015.',
 }
 
 T = {
@@ -46,30 +56,30 @@ T = {
         'nav': {'about': 'À propos', 'gallery': 'Galerie', 'prints': 'Prints', 'goodies': 'Goodies', 'faq': 'FAQ', 'contact': 'Contact'},
         'menu': 'Menu', 'skip': 'Aller au contenu', 'lang_label': 'Langue', 'main_nav': 'Navigation principale', 'home': 'Accueil',
         'title_home': 'Guido De Oliveira, artiste peintre', 'desc_home': 'Œuvres originales, prints et goodies de l’artiste peintre belge Guido De Oliveira.',
-        'hero_1': 'L’art de', 'cta_gallery': 'Voir la galerie', 'cta_prints': 'Voir les prints',
-        'video_h': 'Rencontre avec l’artiste', 'video_p': 'Quelques instants dans l’atelier, pinceau en main, sur « Premiers pas ».',
+        'cta_gallery': 'Voir la galerie', 'cta_prints': 'Voir les prints',
+        'video_h': 'Rencontre avec l’artiste', 'video_p': 'Quelques instants dans l’atelier, pinceau en main.',
         'video_todo': 'Vidéo de présentation', 'video_todo_sub': 'Fichier à fournir, 3 minutes maximum',
         'recent_h': 'Œuvres récentes', 'recent_all': 'Toute la galerie',
-        'prints_p': 'Les œuvres de la galerie en tirages d’art signés, du A4 au A2.', 'prints_go': 'Voir les prints',
-        'goodies_p': 'Les œuvres sur t-shirts, pulls et cadres.', 'goodies_go': 'Voir les goodies',
+        'prints_p': 'Les œuvres de la galerie en tirages d’art signés, du 30 × 40 au 61 × 81 cm.', 'prints_go': 'Voir les prints',
+        'goodies_p': 'Les œuvres sur mugs, t-shirts, stickers, coussins et bien d’autres.', 'goodies_go': 'Voir les goodies',
         'news_h': 'Recevoir la newsletter', 'news_p': 'Nouvelles œuvres, expositions et sorties de prints, directement dans votre boîte mail.',
         'f_name': 'Nom', 'f_email': 'E-mail', 'f_submit': 'S’inscrire', 'f_err_name': 'Indiquez votre nom.',
         'f_err_email': 'Indiquez une adresse e-mail valide.', 'f_ok': 'Merci ! Votre inscription est bien prise en compte.',
         'f_note': 'Vous pouvez vous désinscrire à tout moment.', 'f_subject': 'Inscription à la newsletter',
-        'g_title': 'Galerie', 'g_lead': 'Les œuvres originales, de la plus récente à la plus ancienne.', 'g_years': 'Années',
+        'g_title': 'Galerie', 'g_lead': 'Les œuvres originales, classées par série.', 'g_years': 'Séries', 'todo': 'À fournir', 'price_todo': 'Prix à fournir',
         'technique': 'Technique', 'dimensions': 'Dimensions', 'year': 'Année', 'story': 'L’histoire de l’œuvre',
         'buy': 'Acquérir l’original', 'see_prints': 'Voir le print', 'available': 'Disponible', 'sold': 'Vendue',
         'mail_subject': 'Original : {t}', 'mail_body': 'Bonjour Guido,\n\nJe souhaite acquérir l’œuvre « {t} » ({y}).\n\n',
         'zoom': 'Agrandir l’image', 'close': 'Fermer',
         'p_lead': 'Les œuvres de la galerie en tirages d’art signés, sur papier mat 230 g. Commandez en un clic sur Etsy.',
-        'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter sur Etsy', 'see_original': 'Voir l’original',
-        'gd_lead': 'Les œuvres de la galerie sur t-shirts, pulls et cadres, imprimés et livrés par Redbubble.',
+        'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter', 'see_original': 'Voir l’original',
+        'gd_lead': 'Mugs, t-shirts et sweats, stickers, posters, tote bags, sacs à dos, coussins… Les œuvres en objets du quotidien, imprimés et livrés par Redbubble.', 'gd_alt': 'Photomontage de produits de la boutique Guiarte SMS : coussin, t-shirts, mugs, sweats, stickers, tote bag, poster et casquette décorés des œuvres de Guido De Oliveira', 'gd_go': 'Voir la boutique sur Redbubble', 'gd_note': 'Plus de 130 créations, de nouveaux designs chaque mois.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Pulls', 'cadre': 'Cadres'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Pull à capuche', 'cadre': 'Cadre'},
         'buy_rb': 'Acheter sur Redbubble',
         'faq_title': 'Questions fréquentes', 'faq_lead': 'Tout ce qu’il faut savoir avant d’acheter une œuvre, un print ou un goodie.',
         'faq_more': 'Une autre question ?', 'faq_write': 'Écrivez-moi',
-        'a_title': 'À propos', 'a_more': 'Biographie complète à fournir par l’artiste.', 'a_portrait': 'Guido De Oliveira, de dos, peint le léopard « Premiers pas » dans son atelier',
+        'a_title': 'À propos', 'a_portrait': 'Guido De Oliveira peint dans son atelier, casque sur les oreilles, entouré de ses toiles',
         'a_video': 'Regarder la vidéo',
         'c_title': 'Contact', 'c_lead': 'Une question sur une œuvre, une commande ou une exposition ? Écrivez-moi.',
         'c_email': 'E-mail', 'c_follow': 'Me suivre', 'c_shops': 'Boutiques', 'c_todo_email': 'Adresse e-mail à fournir',
@@ -89,30 +99,30 @@ T = {
         'nav': {'about': 'Over mij', 'gallery': 'Galerij', 'prints': 'Prints', 'goodies': 'Goodies', 'faq': 'FAQ', 'contact': 'Contact'},
         'menu': 'Menu', 'skip': 'Naar de inhoud', 'lang_label': 'Taal', 'main_nav': 'Hoofdnavigatie', 'home': 'Home',
         'title_home': 'Guido De Oliveira, kunstschilder', 'desc_home': 'Originele werken, prints en goodies van de Belgische kunstschilder Guido De Oliveira.',
-        'hero_1': 'De kunst van', 'cta_gallery': 'Bekijk de galerij', 'cta_prints': 'Bekijk de prints',
-        'video_h': 'Maak kennis met de kunstenaar', 'video_p': 'Even binnenkijken in het atelier, penseel in de hand, bij “Eerste stappen”.',
+        'cta_gallery': 'Bekijk de galerij', 'cta_prints': 'Bekijk de prints',
+        'video_h': 'Maak kennis met de kunstenaar', 'video_p': 'Even binnenkijken in het atelier, penseel in de hand.',
         'video_todo': 'Voorstellingsvideo', 'video_todo_sub': 'Bestand aan te leveren, maximaal 3 minuten',
         'recent_h': 'Recente werken', 'recent_all': 'Volledige galerij',
-        'prints_p': 'De werken uit de galerij als gesigneerde kunstprints, van A4 tot A2.', 'prints_go': 'Bekijk de prints',
-        'goodies_p': 'De werken op T-shirts, truien en kaders.', 'goodies_go': 'Bekijk de goodies',
+        'prints_p': 'De werken uit de galerij als gesigneerde kunstprints, van 30 × 40 tot 61 × 81 cm.', 'prints_go': 'Bekijk de prints',
+        'goodies_p': 'De werken op mokken, T-shirts, stickers, kussens en nog veel meer.', 'goodies_go': 'Bekijk de goodies',
         'news_h': 'Schrijf je in op de nieuwsbrief', 'news_p': 'Nieuwe werken, tentoonstellingen en nieuwe prints, rechtstreeks in je mailbox.',
         'f_name': 'Naam', 'f_email': 'E-mail', 'f_submit': 'Inschrijven', 'f_err_name': 'Vul je naam in.',
         'f_err_email': 'Vul een geldig e-mailadres in.', 'f_ok': 'Bedankt! Je inschrijving is genoteerd.',
         'f_note': 'Je kunt je op elk moment uitschrijven.', 'f_subject': 'Inschrijving nieuwsbrief',
-        'g_title': 'Galerij', 'g_lead': 'De originele werken, van het meest recente tot het oudste.', 'g_years': 'Jaren',
+        'g_title': 'Galerij', 'g_lead': 'De originele werken, per reeks.', 'g_years': 'Reeksen', 'todo': 'Aan te leveren', 'price_todo': 'Prijs aan te leveren',
         'technique': 'Techniek', 'dimensions': 'Afmetingen', 'year': 'Jaar', 'story': 'Het verhaal achter het werk',
         'buy': 'Het origineel kopen', 'see_prints': 'Bekijk de print', 'available': 'Beschikbaar', 'sold': 'Verkocht',
         'mail_subject': 'Origineel: {t}', 'mail_body': 'Hallo Guido,\n\nIk wil het werk “{t}” ({y}) graag kopen.\n\n',
         'zoom': 'Afbeelding vergroten', 'close': 'Sluiten',
         'p_lead': 'De werken uit de galerij als gesigneerde kunstprints op mat papier van 230 g. Bestel met één klik op Etsy.',
-        'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen op Etsy', 'see_original': 'Bekijk het origineel',
-        'gd_lead': 'De werken uit de galerij op T-shirts, truien en kaders, gedrukt en geleverd door Redbubble.',
+        'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen', 'see_original': 'Bekijk het origineel',
+        'gd_lead': 'Mokken, T-shirts en sweaters, stickers, posters, draagtassen, rugzakken, kussens… De werken als alledaagse voorwerpen, gedrukt en geleverd door Redbubble.', 'gd_alt': 'Fotomontage van producten uit de winkel Guiarte SMS: kussen, T-shirts, mokken, sweaters, stickers, draagtas, poster en pet met de werken van Guido De Oliveira', 'gd_go': 'Bekijk de winkel op Redbubble', 'gd_note': 'Meer dan 130 creaties, elke maand nieuwe ontwerpen.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Truien', 'cadre': 'Kaders'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Hoodie', 'cadre': 'Kader'},
         'buy_rb': 'Kopen op Redbubble',
         'faq_title': 'Veelgestelde vragen', 'faq_lead': 'Alles wat u moet weten voor u een werk, print of goodie koopt.',
         'faq_more': 'Nog een vraag?', 'faq_write': 'Schrijf me',
-        'a_title': 'Over mij', 'a_more': 'Volledige biografie aan te leveren door de kunstenaar.', 'a_portrait': 'Guido De Oliveira, op de rug gezien, schildert de luipaard “Eerste stappen” in zijn atelier',
+        'a_title': 'Over mij', 'a_portrait': 'Guido De Oliveira schildert in zijn atelier, met een koptelefoon op, omringd door zijn doeken',
         'a_video': 'Bekijk de video',
         'c_title': 'Contact', 'c_lead': 'Een vraag over een werk, een bestelling of een tentoonstelling? Schrijf me.',
         'c_email': 'E-mail', 'c_follow': 'Volg mij', 'c_shops': 'Winkels', 'c_todo_email': 'E-mailadres aan te leveren',
@@ -132,30 +142,30 @@ T = {
         'nav': {'about': 'About', 'gallery': 'Gallery', 'prints': 'Prints', 'goodies': 'Goodies', 'faq': 'FAQ', 'contact': 'Contact'},
         'menu': 'Menu', 'skip': 'Skip to content', 'lang_label': 'Language', 'main_nav': 'Main navigation', 'home': 'Home',
         'title_home': 'Guido De Oliveira, painter', 'desc_home': 'Original paintings, prints and goodies by Belgian painter Guido De Oliveira.',
-        'hero_1': 'The Art of', 'cta_gallery': 'View the gallery', 'cta_prints': 'See the prints',
-        'video_h': 'Meet the artist', 'video_p': 'A few moments in the studio, brush in hand, on “First Steps”.',
+        'cta_gallery': 'View the gallery', 'cta_prints': 'See the prints',
+        'video_h': 'Meet the artist', 'video_p': 'A few moments in the studio, brush in hand.',
         'video_todo': 'Presentation video', 'video_todo_sub': 'File to be supplied, 3 minutes maximum',
         'recent_h': 'Recent works', 'recent_all': 'Full gallery',
-        'prints_p': 'The works from the gallery as signed art prints, from A4 to A2.', 'prints_go': 'See the prints',
-        'goodies_p': 'The works on T-shirts, hoodies and frames.', 'goodies_go': 'See the goodies',
+        'prints_p': 'The works from the gallery as signed art prints, from 30 × 40 to 61 × 81 cm.', 'prints_go': 'See the prints',
+        'goodies_p': 'The works on mugs, T-shirts, stickers, cushions and much more.', 'goodies_go': 'See the goodies',
         'news_h': 'Join the newsletter', 'news_p': 'New works, exhibitions and print releases, straight to your inbox.',
         'f_name': 'Name', 'f_email': 'Email', 'f_submit': 'Subscribe', 'f_err_name': 'Please enter your name.',
         'f_err_email': 'Please enter a valid email address.', 'f_ok': 'Thank you! You’re on the list.',
         'f_note': 'You can unsubscribe at any time.', 'f_subject': 'Newsletter subscription',
-        'g_title': 'Gallery', 'g_lead': 'The original works, from the most recent to the oldest.', 'g_years': 'Years',
+        'g_title': 'Gallery', 'g_lead': 'The original works, by series.', 'g_years': 'Series', 'todo': 'To be supplied', 'price_todo': 'Price to be supplied',
         'technique': 'Technique', 'dimensions': 'Dimensions', 'year': 'Year', 'story': 'The story behind the work',
         'buy': 'Buy the original', 'see_prints': 'See the print', 'available': 'Available', 'sold': 'Sold',
         'mail_subject': 'Original: {t}', 'mail_body': 'Hello Guido,\n\nI would like to buy “{t}” ({y}).\n\n',
         'zoom': 'Enlarge image', 'close': 'Close',
         'p_lead': 'The works from the gallery as signed art prints on 230 g matte paper. Order in one click on Etsy.',
-        'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy on Etsy', 'see_original': 'See the original',
-        'gd_lead': 'The works from the gallery on T-shirts, hoodies and frames, printed and shipped by Redbubble.',
+        'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy', 'see_original': 'See the original',
+        'gd_lead': 'Mugs, T-shirts and sweatshirts, stickers, posters, tote bags, backpacks, cushions… The works on everyday objects, printed and shipped by Redbubble.', 'gd_alt': 'Photo montage of products from the Guiarte SMS shop: cushion, T-shirts, mugs, sweatshirts, stickers, tote bag, poster and cap featuring Guido De Oliveira’s works', 'gd_go': 'Visit the shop on Redbubble', 'gd_note': 'Over 130 designs, with new ones every month.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Hoodies', 'cadre': 'Frames'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Hoodie', 'cadre': 'Frame'},
         'buy_rb': 'Buy on Redbubble',
         'faq_title': 'Frequently asked questions', 'faq_lead': 'Everything to know before buying a painting, a print or a goodie.',
         'faq_more': 'Another question?', 'faq_write': 'Write to me',
-        'a_title': 'About', 'a_more': 'Full biography to be supplied by the artist.', 'a_portrait': 'Guido De Oliveira, seen from behind, painting the leopard “First Steps” in his studio',
+        'a_title': 'About', 'a_portrait': 'Guido De Oliveira painting in his studio, headphones on, surrounded by his canvases',
         'a_video': 'Watch the video',
         'c_title': 'Contact', 'c_lead': 'A question about a work, a commission or an exhibition? Write to me.',
         'c_email': 'Email', 'c_follow': 'Follow me', 'c_shops': 'Shops', 'c_todo_email': 'Email address to be supplied',
@@ -173,11 +183,12 @@ FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
 # Icônes des réseaux (pied de page), tracées sur une grille de 24.
 SOCIAL_ICONS = {
     'instagram': '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="17.3" cy="6.7" r="1.15"/>',
-    'facebook': '<path d="M14 8h2.5V4.5H14c-2.5 0-4 1.6-4 4.2V11H7.5v3.5H10V21h3.5v-6.5H16l.5-3.5h-3V9c0-.6.4-1 1-1Z"/>',
+    'pinterest': '<path d="M12 2a10 10 0 0 0-3.64 19.31c-.09-.79-.16-2 .03-2.86l1.17-4.97s-.3-.6-.3-1.48c0-1.39.81-2.43 1.81-2.43.85 0 1.27.64 1.27 1.41 0 .86-.55 2.14-.83 3.33-.24 1 .5 1.81 1.48 1.81 1.78 0 3.15-1.88 3.15-4.59 0-2.4-1.73-4.08-4.19-4.08-2.85 0-4.53 2.14-4.53 4.36 0 .86.33 1.79.75 2.29.08.1.09.19.07.29l-.28 1.13c-.04.18-.15.22-.34.13-1.25-.58-2.03-2.41-2.03-3.88 0-3.16 2.29-6.06 6.62-6.06 3.47 0 6.17 2.48 6.17 5.79 0 3.45-2.18 6.23-5.2 6.23-1.02 0-1.97-.53-2.3-1.15l-.62 2.38c-.23.87-.84 1.96-1.25 2.62A10 10 0 1 0 12 2Z"/>',
     'tiktok': '<path d="M16.6 3c.3 2.3 1.8 3.9 4 4.1v3.3c-1.5 0-2.9-.4-4-1.2v6.3a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v3.4a2.2 2.2 0 1 0 1.3 2V3h3.3Z"/>',
     'youtube': '<path fill-rule="evenodd" d="M21.6 7.2a2.6 2.6 0 0 0-1.8-1.8C18.2 5 12 5 12 5s-6.2 0-7.8.4a2.6 2.6 0 0 0-1.8 1.8A27 27 0 0 0 2 12a27 27 0 0 0 .4 4.8 2.6 2.6 0 0 0 1.8 1.8C5.8 19 12 19 12 19s6.2 0 7.8-.4a2.6 2.6 0 0 0 1.8-1.8A27 27 0 0 0 22 12a27 27 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z"/>',
 }
-SOCIAL_NAMES = {'instagram': 'Instagram', 'facebook': 'Facebook', 'tiktok': 'TikTok', 'youtube': 'YouTube'}
+SOCIAL_NAMES = {'instagram': 'Instagram', 'tiktok': 'TikTok', 'pinterest': 'Pinterest', 'youtube': 'YouTube'}
+SOCIALS = ('instagram', 'tiktok', 'pinterest', 'youtube')
 
 
 def price(n, lang):
@@ -190,16 +201,46 @@ def price(n, lang):
 
 
 def img(o, size=''):
-    stem = o['image'].rsplit('.', 1)[0]
-    return f'../assets/img/oeuvres/{stem}{size}.jpg'
+    return f'../assets/img/oeuvres/{o["id"]}{size}.webp'
+
+
+_SIZES = {}
+
+
+def size_of(o, full=False):
+    """Dimensions réelles du fichier généré par images.py."""
+    f = OUT / 'assets' / 'img' / 'oeuvres' / f'{o["id"]}{"" if full else "-600"}.webp'
+    if f not in _SIZES:
+        with Image.open(f) as im:
+            _SIZES[f] = im.size
+    return _SIZES[f]
 
 
 def wh(o, full=False):
-    """Dimensions réelles des fichiers (évite les sauts de mise en page au chargement)."""
-    w, h = (1280, 1600) if o['ratio'] == 'p' else (1600, 1280)
-    if not full:
-        w, h = w * 600 // max(w, h), h * 600 // max(w, h)
+    """width/height réels (évite les sauts de mise en page au chargement)."""
+    w, h = size_of(o, full)
     return f'width="{w}" height="{h}"'
+
+
+def srcset(o):
+    small, big = size_of(o)[0], size_of(o, True)[0]
+    if big <= small:
+        return ''
+    return f' srcset="{img(o, "-600")} {small}w, {img(o)} {big}w" sizes="(min-width: 900px) 50vw, 100vw"'
+
+
+def cap(o):
+    """Une source plus étroite que la colonne garde sa taille réelle au lieu d'être étirée (et floue)."""
+    w = size_of(o, True)[0]
+    return f' style="max-width:{w}px"' if w < 1000 else ''
+
+
+def series_name(key, lang):
+    return dict(SERIES)[key][lang]
+
+
+def todo(t):
+    return f'<span class="todo">{e(t["todo"])}</span>'
 
 
 def ext(key, t):
@@ -230,7 +271,7 @@ def page(lang, key, title, desc, body):
                     f'<li><a {ext("etsy", t)}>Etsy</a></li><li><a {ext("redbubble", t)}>Redbubble</a></li>')
     socials = ''.join(
         f'<li><a {ext(k, t)} aria-label="{e(t["follow"])} {SOCIAL_NAMES[k]}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true">{SOCIAL_ICONS[k]}</svg></a></li>'
-        for k in ('instagram', 'facebook', 'tiktok', 'youtube'))
+        for k in SOCIALS)
     return f'''<!doctype html>
 <html lang="{HTML_LANG[lang]}">
 <head>
@@ -290,8 +331,9 @@ LOCALE = {'fr': 'fr-BE', 'nl': 'nl-BE', 'en': 'en-IE'}
 def shop_cfg(lang):
     """Données de la boutique transmises au script du panier."""
     t, s = T[lang], SLUGS[lang]
-    products = {o['id']: {'title': o['titre'][lang], 'price': o['prix'], 'sold': o['vendue'], 'img': img(o, '-600'),
-                          'meta': f"{o['tech'][lang]}, {o['dim']}, {o['annee']}"} for o in OEUVRES}
+    products = {o['id']: {'title': o['titre'], 'price': o['prix'], 'sold': o['vendue'], 'img': img(o, '-600'),
+                          'meta': ', '.join(str(x) for x in (o['tech'] and o['tech'][lang], o['dim'], o['annee']) if x)}
+                for o in OEUVRES if o['prix']}
     cfg = {'locale': LOCALE[lang], 'cartUrl': s['cart'], 'checkoutUrl': LIENS['checkout'] or '', 'products': products,
            't': {'addCart': t['add_cart'], 'inCart': t['in_cart'], 'added': t['added'], 'seeCart': t['see_cart'],
                  'remove': t['remove'], 'unique': t['unique'], 'free': t['free']}}
@@ -316,42 +358,8 @@ def newsletter(lang, idp):
 
 # ── Maquettes produits : l'œuvre réelle posée sur le support ──
 
-DARK = ('#1c1b19', '#2d4a40', '#33415c')
-
-
 def mock_print(o, lang):
     return f'<div class="mock mock-print"><div class="mock-frame"><div class="mock-mat"><img src="{img(o, "-600")}" {wh(o)} alt="{e(o["alt"][lang])}" loading="lazy"></div></div></div>'
-
-
-def mock_tshirt(o, lang, color, n):
-    shade = 'rgba(255,255,255,.07)' if color in DARK else 'rgba(0,0,0,.07)'
-    body = 'M100 22 Q150 52 200 22 L262 46 L296 112 L252 132 L236 106 L236 318 L64 318 L64 106 L48 132 L4 112 L38 46 Z'
-    return f'''<svg class="mock mock-garment" viewBox="0 0 300 330" role="img" aria-label="{e(o["alt"][lang])}">
-  <defs><clipPath id="c{n}"><rect x="106" y="92" width="88" height="110" rx="2"/></clipPath>
-  <linearGradient id="g{n}" x1="0" x2="1"><stop offset="0" stop-color="{shade}"/><stop offset=".5" stop-color="rgba(0,0,0,0)"/><stop offset="1" stop-color="{shade}"/></linearGradient></defs>
-  <path d="{body}" fill="{color}"/><path d="{body}" fill="url(#g{n})"/>
-  <path d="M100 22 Q150 52 200 22" fill="none" stroke="{shade}" stroke-width="6"/>
-  <image href="{img(o, "-600")}" x="106" y="92" width="88" height="110" preserveAspectRatio="xMidYMid slice" clip-path="url(#c{n})"/>
-</svg>'''
-
-
-def mock_pull(o, lang, color, n):
-    line = 'rgba(255,255,255,.14)' if color in DARK else 'rgba(0,0,0,.1)'
-    return f'''<svg class="mock mock-garment" viewBox="0 0 300 330" role="img" aria-label="{e(o["alt"][lang])}">
-  <defs><clipPath id="c{n}"><rect x="108" y="98" width="84" height="96" rx="2"/></clipPath></defs>
-  <path d="M96 44 Q100 4 150 4 Q200 4 204 44 Q150 70 96 44 Z" fill="{color}"/>
-  <path d="M96 44 Q100 4 150 4 Q200 4 204 44" fill="none" stroke="{line}" stroke-width="3"/>
-  <path d="M96 44 Q150 80 204 44 L254 62 Q286 84 292 150 L300 296 L264 302 L252 168 L246 318 L54 318 L48 168 L36 302 L0 296 L8 150 Q14 84 46 62 Z" fill="{color}"/>
-  <path d="M96 44 Q150 80 204 44" fill="none" stroke="{line}" stroke-width="3"/>
-  <path d="M138 70 L136 112 M162 70 L164 112" stroke="{line}" stroke-width="2"/>
-  <path d="M94 232 L206 232 L220 296 L80 296 Z" fill="none" stroke="{line}" stroke-width="2.5"/>
-  <path d="M54 306 L246 306" stroke="{line}" stroke-width="2.5"/>
-  <image href="{img(o, "-600")}" x="108" y="98" width="84" height="96" preserveAspectRatio="xMidYMid slice" clip-path="url(#c{n})"/>
-</svg>'''
-
-
-def mock_cadre(o, lang, color):
-    return f'<div class="mock mock-wall"><div class="mock-cadre" style="--frame:{color}"><img src="{img(o, "-600")}" {wh(o)} alt="{e(o["alt"][lang])}" loading="lazy"></div></div>'
 
 
 # ── Pages ─────────────────────────────────────────────────────────
@@ -361,10 +369,7 @@ def video_block(lang):
     if v and ('youtube' in v or 'vimeo' in v):
         inner = f'<iframe src="{e(v)}" title="{e(t["video_h"])}" loading="lazy" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>'
     elif v and (OUT / v).exists():
-        inner = f'<video src="../{e(v)}" poster="../assets/video/presentation-poster.jpg" controls preload="none" playsinline></video>'
-    elif (OUT / 'assets/video/presentation-poster.jpg').exists():
-        # Fichier vidéo pas encore livré : l'image de l'atelier tient la place, sans lecteur cassé.
-        inner = f'<img src="../assets/video/presentation-poster.jpg" alt="" class="video-still">'
+        inner = f'<video src="../{e(v)}" controls preload="metadata" playsinline></video>'
     else:
         inner = f'<div class="video-todo"><strong>{e(t["video_todo"])}</strong><span>{e(t["video_todo_sub"])}</span></div>'
     return f'<div class="video-frame">{inner}</div>'
@@ -372,25 +377,40 @@ def video_block(lang):
 
 def work_card(o, lang, href):
     t = T[lang]
-    tag = f'<span class="sold-tag">{e(t["sold"])}</span>' if o['vendue'] else f'<span class="price">{price(o["prix"], lang)}</span>'
+    meta = [e(series_name(o['serie'], lang))]
+    if o['annee']:
+        meta.append(str(o['annee']))
+    if o['vendue']:
+        meta.append(f'<span class="sold-tag">{e(t["sold"])}</span>')
+    elif o['prix']:
+        meta.append(f'<span class="price">{price(o["prix"], lang)}</span>')
     return f'''<li class="work-card"><a href="{href}">
   <div class="frame"><img src="{img(o, "-600")}" {wh(o)} alt="{e(o["alt"][lang])}" loading="lazy"></div>
-  <h3>{e(o["titre"][lang])}</h3>
-  <p>{o["annee"]} — {tag}</p></a></li>'''
+  <h3>{e(o["titre"])}</h3>
+  <p>{" — ".join(meta)}</p></a></li>'''
+
+
+def buy_mail(o, lang):
+    """Sans prix en ligne, l'achat passe par un e-mail pré-rempli à l'artiste."""
+    t = T[lang]
+    subject = t['mail_subject'].format(t=o['titre'])
+    body = t['mail_body'].format(t=o['titre'], y=o['annee'] or '').replace(' ()', '')
+    if LIENS['email']:
+        return f'href="mailto:{LIENS["email"]}?subject={quote(subject)}&amp;body={quote(body)}"'
+    return f'href="{SLUGS[lang]["contact"]}"'
 
 
 def home(lang):
     t, s = T[lang], SLUGS[lang]
-    hero = OEUVRES[0]
-    recent = sorted(OEUVRES, key=lambda o: -o['annee'])[:4]
+    hero = by_id('wave-at-sunset')  # choix de l'artiste, sans titre, en attendant sa vidéo de présentation
+    recent = [o for o in sorted(OEUVRES, key=lambda o: -(o['annee'] or 0)) if o is not hero][:4]
     cards = ''.join(work_card(o, lang, f'{s["gallery"]}#{o["id"]}') for o in recent)
-    tee, pull = by_id('roi-du-couchant'), by_id('l-ombre-verte')
     body = f'''
 <section class="wrap hero">
   <div>
     <div class="hero-mark">{LOGO}</div>
-    <h1>{e(t["hero_1"])} <strong>Guido De Oliveira.</strong></h1>
-    <p class="lead">{e(BIO[lang])}</p>
+    <h1 lang="en">{e(TAGLINE[0])} <strong>{e(TAGLINE[1])}</strong></h1>
+    <p class="lead">{e(INTRO[lang])}</p>
     <div class="actions">
       <a class="btn" href="{s["gallery"]}">{e(t["cta_gallery"])}</a>
       <a class="btn btn-line" href="{s["prints"]}">{e(t["cta_prints"])}</a>
@@ -398,34 +418,26 @@ def home(lang):
   </div>
   <figure class="hero-art">
     <a href="{s["gallery"]}#{hero["id"]}"><img src="{img(hero)}" {wh(hero, True)} alt="{e(hero["alt"][lang])}" fetchpriority="high"></a>
-    <figcaption class="caption">{e(hero["titre"][lang])}, {hero["annee"]}</figcaption>
   </figure>
 </section>
 
-<section class="section section-wall" id="video">
-  <div class="wrap">
-    <div class="video-head"><h2>{e(t["video_h"])}</h2><p class="lead">{e(t["video_p"])}</p></div>
-    {video_block(lang)}
-  </div>
-</section>
-
-<section class="section">
+<section class="section section-wall">
   <div class="wrap">
     <div class="section-head"><h2>{e(t["recent_h"])}</h2><a class="link" href="{s["gallery"]}">{e(t["recent_all"])}</a></div>
     <ul class="works">{cards}</ul>
   </div>
 </section>
 
-<section class="section" style="padding-top:0">
+<section class="section">
   <div class="wrap shops">
     <a class="shop" href="{s["prints"]}">
       <div><h3>{e(t["nav"]["prints"])}</h3><p>{e(t["prints_p"])}</p></div>
-      <div class="shop-visual">{mock_print(by_id("braises-du-soir"), lang)}</div>
+      <div class="shop-visual">{mock_print(by_id("lighthouse-2"), lang)}</div>
       <span class="go">{e(t["prints_go"])}</span>
     </a>
     <a class="shop shop-alt" href="{s["goodies"]}">
       <div><h3>{e(t["nav"]["goodies"])}</h3><p>{e(t["goodies_p"])}</p></div>
-      <div class="shop-visual shop-visual-duo">{mock_tshirt(tee, lang, "#f5f4f0", 900)}{mock_pull(pull, lang, "#33415c", 901)}</div>
+      <div class="shop-visual"><img class="shop-montage" src="../assets/img/goodies-800.webp" width="800" height="599" alt="{e(t["gd_alt"])}" loading="lazy"></div>
       <span class="go">{e(t["goodies_go"])}</span>
     </a>
   </div>
@@ -442,38 +454,43 @@ def home(lang):
 
 def gallery(lang):
     t, s = T[lang], SLUGS[lang]
-    years = sorted({o['annee'] for o in OEUVRES}, reverse=True)
-    year_nav = ''.join(f'<li><a href="#annee-{y}">{y}</a></li>' for y in years)
+    series = [(k, [o for o in OEUVRES if o['serie'] == k]) for k, _ in SERIES]
+    series = [(k, works) for k, works in series if works]
+    nav = ''.join(f'<li><a href="#serie-{k}">{e(series_name(k, lang))}</a></li>' for k, _ in series)
     sections = []
-    for y in years:
+    for k, works in series:
         items = []
-        for o in [o for o in OEUVRES if o['annee'] == y]:
-            title = o['titre'][lang]
+        for o in works:
+            title = o['titre']
             if o['vendue']:
                 buy_block = f'<p class="status sold">{e(t["sold"])}</p><div class="actions"><a class="btn btn-line" href="{s["prints"]}#print-{o["id"]}">{e(t["see_prints"])}</a></div>'
-            else:
+            elif o['prix']:
                 buy_block = (f'<span class="price">{price(o["prix"], lang)}</span><p class="status">{e(t["unique"])}</p>'
                              f'<div class="actions"><button type="button" class="btn" data-add="{o["id"]}">{e(t["add_cart"])}</button>'
                              f'<button type="button" class="btn btn-line" data-buy-now="{o["id"]}">{e(t["buy_now"])}</button></div>'
                              f'<p class="also"><a class="link" href="{s["prints"]}#print-{o["id"]}">{e(t["see_prints"])}</a></p>')
+            else:
+                buy_block = (f'<p class="price-todo"><span class="todo">{e(t["price_todo"])}</span></p><p class="status">{e(t["unique"])}</p>'
+                             f'<div class="actions"><a class="btn" {buy_mail(o, lang)}>{e(t["buy"])}</a>'
+                             f'<a class="btn btn-line" href="{s["prints"]}#print-{o["id"]}">{e(t["see_prints"])}</a></div>')
+            specs = (f'<dt>{e(t["technique"])}</dt><dd>{e(o["tech"][lang]) if o["tech"] else todo(t)}</dd>'
+                     f'<dt>{e(t["dimensions"])}</dt><dd>{e(o["dim"]) if o["dim"] else todo(t)}</dd>'
+                     f'<dt>{e(t["year"])}</dt><dd>{o["annee"] or todo(t)}</dd>')
+            desc = f'<p class="desc">{e(o["desc"][lang])}</p>' if o['desc'] else ''
+            story = f'<div class="story"><h4>{e(t["story"])}</h4><p>{e(o["histoire"][lang])}</p></div>' if o['histoire'] else ''
             items.append(f'''<article class="artwork" id="{o["id"]}">
-  <button class="zoom" type="button" data-full="{img(o)}" aria-label="{e(t["zoom"])} : {e(title)}"><img src="{img(o, "-600")}" srcset="{img(o, "-600")} 600w, {img(o)} 1600w" sizes="(min-width: 900px) 50vw, 100vw" {wh(o, True)} alt="{e(o["alt"][lang])}" loading="lazy"></button>
+  <button class="zoom" type="button" data-full="{img(o, "-zoom")}" aria-label="{e(t["zoom"])} : {e(title)}"><img src="{img(o, "-600")}"{srcset(o)}{cap(o)} {wh(o, True)} alt="{e(o["alt"][lang])}" loading="lazy"></button>
   <div>
     <h3>{e(title)}</h3>
-    <dl class="specs">
-      <dt>{e(t["technique"])}</dt><dd>{e(o["tech"][lang])}</dd>
-      <dt>{e(t["dimensions"])}</dt><dd>{e(o["dim"])}</dd>
-      <dt>{e(t["year"])}</dt><dd>{y}</dd>
-    </dl>
-    <p class="desc">{e(o["desc"][lang])}</p>
-    <div class="story"><h4>{e(t["story"])}</h4><p>{e(o["histoire"][lang])}</p></div>
+    <dl class="specs">{specs}</dl>
+    {desc}{story}
     <div class="buy">{buy_block}</div>
   </div>
 </article>''')
-        sections.append(f'<section class="year" id="annee-{y}"><div class="wrap"><h2 class="year-num">{y}</h2>{"".join(items)}</div></section>')
+        sections.append(f'<section class="year" id="serie-{k}"><div class="wrap"><h2 class="year-num series-name">{e(series_name(k, lang))}</h2>{"".join(items)}</div></section>')
     body = f'''
 {head(t["g_title"], t["g_lead"])}
-<nav class="years" aria-label="{e(t["g_years"])}"><div class="wrap"><ul>{year_nav}</ul></div></nav>
+<nav class="years" aria-label="{e(t["g_years"])}"><div class="wrap"><ul>{nav}</ul></div></nav>
 {"".join(sections)}
 <dialog class="lightbox"><img src="" alt=""><button type="button">{e(t["close"])}</button></dialog>'''
     return page(lang, 'gallery', f'{t["g_title"]} | Guido De Oliveira', t['g_lead'], body)
@@ -481,11 +498,12 @@ def gallery(lang):
 
 def prints(lang):
     t, s = T[lang], SLUGS[lang]
-    formats = ''.join(f'<li><span>{f}</span><strong>{price(p, lang)}</strong></li>' for f, p in PRINT_FORMATS)
+    formats = ''.join(f'<li><span>{e(n[lang])} <small>{d}</small></span><strong>{e(t["from"].format(p=price(p, lang)))}</strong></li>'
+                      for n, d, p in PRINT_FORMATS)
     cards = ''.join(f'''<li class="product" id="print-{o["id"]}">
   {mock_print(o, lang)}
-  <h3>{e(o["titre"][lang])}</h3>
-  <p class="meta">{e(t["from"].format(p=price(PRINT_FORMATS[0][1], lang)))}</p>
+  <h3>{e(o["titre"])}</h3>
+  <p class="meta">{e(t["from"].format(p=price(PRINT_FORMATS[0][2], lang)))}</p>
   <div class="product-actions"><a class="btn" {ext("etsy", t)}>{e(t["buy_etsy"])}</a><a class="link" href="{s["gallery"]}#{o["id"]}">{e(t["see_original"])}</a></div>
 </li>''' for o in OEUVRES)
     body = f'''
@@ -497,27 +515,15 @@ def prints(lang):
 
 def goodies(lang):
     t = T[lang]
-    tabs = ''.join(f'<li><a href="#{g["type"]}">{e(t["gd_types"][g["type"]])}</a></li>' for g in GOODIES)
-    sections, n = [], 0
-    for g in GOODIES:
-        cards = []
-        for i, o in enumerate(OEUVRES):
-            color = g['couleurs'][i % len(g['couleurs'])]
-            n += 1
-            mock = (mock_tshirt(o, lang, color, n) if g['type'] == 'tshirt'
-                    else mock_pull(o, lang, color, n) if g['type'] == 'pull'
-                    else mock_cadre(o, lang, color))
-            cards.append(f'''<li class="product">
-  {mock}
-  <h3>{e(o["titre"][lang])}</h3>
-  <p class="meta">{e(t["gd_one"][g["type"]])} — {e(t["from"].format(p=price(g["prix"], lang)))}</p>
-  <div class="product-actions"><a class="btn" {ext("redbubble", t)}>{e(t["buy_rb"])}</a></div>
-</li>''')
-        sections.append(f'<section class="goodies-type" id="{g["type"]}"><div class="wrap"><h2>{e(t["gd_types"][g["type"]])}</h2><ul class="products">{"".join(cards)}</ul></div></section>')
     body = f'''
 {head(t["nav"]["goodies"], t["gd_lead"])}
-<nav class="years" aria-label="{e(t["nav"]["goodies"])}"><div class="wrap"><ul>{tabs}</ul></div></nav>
-{"".join(sections)}'''
+<section class="wrap goodies-shop">
+  <a class="goodies-montage" {ext("redbubble", t)}><img src="../assets/img/goodies.webp" srcset="../assets/img/goodies-800.webp 800w, ../assets/img/goodies.webp 1600w" sizes="(min-width: 1250px) 73rem, 100vw" width="1600" height="1198" alt="{e(t["gd_alt"])}"></a>
+  <div class="goodies-cta">
+    <a class="btn" {ext("redbubble", t)}>{e(t["gd_go"])}</a>
+    <p class="note">{e(t["gd_note"])}</p>
+  </div>
+</section>'''
     return page(lang, 'goodies', f'{t["nav"]["goodies"]} | Guido De Oliveira', t['gd_lead'], body)
 
 
@@ -538,10 +544,9 @@ def about(lang):
     body = f'''
 <div class="wrap page-head"><h1>{e(t["a_title"])}</h1></div>
 <section class="wrap about">
-  <div class="portrait"><img src="../assets/img/portrait.jpg" width="1024" height="1280" alt="{e(t["a_portrait"])}"></div>
+  <div class="portrait"><img src="../assets/img/atelier.webp" width="1080" height="1080" alt="{e(t["a_portrait"])}"></div>
   <div class="prose">
     <p class="first">{e(BIO[lang])}</p>
-    <p><span class="todo">{e(t["a_more"])}</span></p>
     <div class="actions" style="margin-top:2.5rem">
       <a class="btn" href="{s["gallery"]}">{e(t["cta_gallery"])}</a>
       <a class="btn btn-line" href="#video">{e(t["a_video"])}</a>
@@ -562,7 +567,7 @@ def contact(lang):
     t, s = T[lang], SLUGS[lang]
     email = LIENS['email']
     email_html = f'<a class="link" href="mailto:{e(email)}">{e(email)}</a>' if email else f'<span class="todo">{e(t["c_todo_email"])}</span>'
-    soc = ''.join(f'<li><a {ext(k, t)}>{SOCIAL_NAMES[k]}</a></li>' for k in ('instagram', 'facebook', 'tiktok', 'youtube'))
+    soc = ''.join(f'<li><a {ext(k, t)}>{SOCIAL_NAMES[k]}</a></li>' for k in SOCIALS)
     shp = (f'<li><a href="{s["prints"]}">Etsy <small>{e(t["nav"]["prints"])}</small></a></li>'
            f'<li><a href="{s["goodies"]}">Redbubble <small>{e(t["nav"]["goodies"])}</small></a></li>')
     body = f'''

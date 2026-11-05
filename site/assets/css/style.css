@@ -199,7 +199,7 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 /* ── À propos ── */
 .about { display: grid; gap: 3rem; }
 @media (min-width: 900px) { .about { grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; } }
-.about .portrait { aspect-ratio: 4 / 5; background: var(--wall); }
+.about .portrait { aspect-ratio: 1 / 1; background: var(--wall); }
 .prose { max-width: 40rem; }
 .prose p + p { margin-top: 1.25rem; }
 .prose .first { font-size: 1.35rem; line-height: 1.55; }
@@ -279,7 +279,6 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .shop { min-height: 0; }
 .shop-visual { max-width: 15rem; }
 .shop-visual .mock-print, .shop-visual .mock-garment { background: rgb(255 255 255 / 0.08); }
-.shop-visual-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; max-width: 20rem; }
 
 /* FAQ */
 .faq-grid { display: grid; gap: 3rem; padding-bottom: 7rem; }
@@ -356,3 +355,32 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 }
 .about .portrait img { width: 100%; height: 100%; object-fit: cover; }
 .video-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Œuvres réelles (2026-11-05) : chaque tableau garde ses proportions, jamais recadré ── */
+.work-card .frame { display: grid; place-items: center; padding: 8%; }
+.work-card img { width: auto; height: auto; max-width: 100%; max-height: 100%; object-fit: contain; box-shadow: 0 16px 26px -16px rgb(28 27 25 / 0.5); }
+.section-wall .work-card .frame { background: #fff; }
+.series-name { font-size: clamp(2.2rem, 5.5vw, 4rem); color: #d3cfc8; }
+.price-todo { margin-bottom: 0.75rem; }
+.formats small { color: var(--muted); font-size: 0.88rem; }
+
+/* Goodies : un photomontage de la boutique Redbubble, puis le lien */
+.shop-visual .shop-montage { width: 100%; border-radius: 2px; }
+.goodies-shop { padding-bottom: 7rem; }
+.goodies-montage { display: block; }
+.goodies-montage img { width: 100%; }
+.goodies-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-top: 2rem; }
+.goodies-cta .note { margin: 0; }
+.zoom img { margin-inline: auto; } /* une petite source garde sa taille réelle : max-width posé par build.py */
+.years li { white-space: nowrap; }
+
+/* Œuvres protégées : l'image ne reçoit aucun clic, c'est son cadre qui les prend. Pas de menu
+   « Enregistrer l'image », pas de glisser-déposer, pas d'appui long sur mobile. Voir site.js. */
+.zoom img, .work-card .frame img, .hero-art img, .mock img, .lightbox img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-touch-callout: none;
+}
+.zoom, .work-card .frame, .hero-art, .mock, .lightbox { -webkit-touch-callout: none; }

@@ -11,3 +11,9 @@ desktop.ini
 # Secrets
 .env
 .env.*
+
+# Fichiers bruts livrés par l’artiste (lourds, documents privés) : lus par src/images.py, jamais publiés
+Oeuvres originales disponibles/
+Logos/
+more info/
+.playwright-mcp/
