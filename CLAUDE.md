@@ -1,6 +1,6 @@
-# Guido De Oliveira — site d'artiste peintre avec e-shop
+# Guido De Oliveira — site d'artiste peintre
 
-Site vitrine et boutique, **HTML/CSS/JS pur** (aucun framework), en **FR / NL / EN**. Commencé le 2026-10-16,
+Site vitrine, **HTML/CSS/JS pur** (aucun framework), en **FR / NL / EN**. Commencé le 2026-10-16,
 contenu réel de l'artiste intégré le 2026-11-05.
 Références de l'artiste : Chuck Black et Stéphane Alsac (simplicité), Raffaela Lerch (boutique Etsy).
 Objectif : le moins de clics possible entre le coup de cœur et l'achat.
@@ -13,8 +13,7 @@ Logos/                            logo noir et logo blanc (PNG) — hors git ; v
 more info/                        notes de l'artiste sur la maquette, FAQ, book, CV, CGV, vie privée, photos — hors git
 site/                  le site à mettre en ligne tel quel
   index.html           redirige vers la langue du navigateur, sinon choix FR / NL / EN
-  fr/ nl/ en/          accueil, à propos, galerie (e-shop), prints, goodies, FAQ, contact, panier
-  assets/js/cart.js    panier (stockage local du navigateur), compteur, commande
+  fr/ nl/ en/          accueil, à propos, galerie, prints, goodies, FAQ, contact, CGV, confidentialité
   assets/img/oeuvres/  <id>.webp (1600 px max) et <id>-600.webp, proportions d'origine
 source/                bruts hors ligne : photo d'atelier, photos Redbubble du montage goodies (source/goodies/)
 src/data.py            CONTENU : séries, œuvres, liens, formats de prints, FAQ, expositions et presse
@@ -28,7 +27,7 @@ python src/images.py   # après ajout ou remplacement d'une œuvre
 python src/build.py    # (sans -I : le script importe data.py)
 ```
 
-Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact · Panier. Pied de page : CGV · Politique de confidentialité.
+Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact (plus de panier depuis le 2026-11-06). Pied de page : CGV · Politique de confidentialité.
 « À propos » se termine par **Expositions et distinctions** (book 2025 p. 19 + CV).
 
 ## Pages légales (2026-11-05)
@@ -36,9 +35,9 @@ Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact · Panier. Pi
 Reprises des deux .docx de l'artiste, sans rien ajouter de juridique. Écarts, listés en tête de `legal.py` :
 section « Vendeur » ajoutée (adresse et n° d'entreprise « À fournir »), téléphone retiré du contact (aucun sur le
 site), e-mail inséré à la place du `[adresse e-mail de contact]` laissé vide. **À faire valider avant toute vente** :
-la politique parle de comptes clients et de cookies d'analyse que le site n'a pas ; les CGV annoncent la livraison
-offerte dès 75 € HTVA alors que le panier (`LIVRAISON`, valeurs de démo) facture 49 € pour l'UE ; pas d'acceptation
-des CGV au moment de payer (à ajouter quand le paiement sera branché).
+la politique parle de comptes clients, de panier et de cookies d'analyse que le site n'a pas ; les CGV décrivent une
+commande et un paiement en ligne (Stripe) alors que, depuis le 2026-11-06, l'achat d'un original se fait par demande
+directe à l'artiste.
 
 ## Ce que l'artiste a demandé (more info/NotesSiteWeb_2.odt)
 
@@ -59,7 +58,7 @@ des CGV au moment de payer (à ajouter quand le paiement sera branché).
 
 - **20 œuvres réelles**. Année, technique et format repris du book 2025 et du CV pour 8 d'entre elles ;
   le reste s'affiche « À fournir ». **Prix, descriptions et histoires : sur une fiche séparée de l'artiste, pas
-  encore reçue.** Sans prix, l'œuvre propose « Acquérir l'original » par e-mail pré-rempli, pas le panier.
+  encore reçue.** Les cartes « Œuvres récentes » de l'accueil n'affichent pas l'année (demande du 2026-11-06).
 - 7 fichiers sources font moins de 1 000 px (Glory II, IV, V ; Lighthouse 3, 4, 5 ; Sunset at Mar Menor) :
   affichés à leur taille réelle, jamais étirés. Demander les versions HD.
 - Le léopard de l'ancien site (« Leo the leopard » sur Redbubble, « Leo is going out for a walk » dans le book)
@@ -67,18 +66,19 @@ des CGV au moment de payer (à ajouter quand le paiement sera branché).
 - Plus aucune image générée : photo d'atelier = `Mepainting.webp` de l'artiste, vidéo = `Section_a_propos.mp4` (4 s).
 - Traductions NL et EN (intro, bio, FAQ, textes alternatifs) faites par nos soins, à faire valider.
 
-## E-shop
+## Vente (plus d'e-commerce depuis le 2026-11-06)
 
-- Une œuvre **avec prix** : « Ajouter au panier » et « Acheter maintenant » ; vendue = non ajoutable ; une seule fois
-  dans le panier (pièce unique). Une œuvre **sans prix** n'entre pas dans le panier.
+- **Pas de panier ni de paiement en ligne** (décision du 2026-11-06) : page panier, `cart.js`, frais de livraison et
+  lien de paiement supprimés. Chaque original se vend par demande directe à l'artiste, prix affiché s'il est connu.
+- Les CGV et la politique de confidentialité de l'artiste décrivent encore une commande en ligne (paiement Stripe,
+  « produits ajoutés au panier ») : à faire adapter par l'artiste, ne pas réécrire son texte légal de notre propre chef.
 - « Acquérir l'original » (œuvre sans prix) ouvre une **fenêtre** (`inquiry_dialog` + `site.js`) : Gmail, Outlook,
   appli de messagerie ou copie du message. Un simple lien mailto ne faisait rien sur un PC sans logiciel de
   messagerie configuré. Le message reprend série, année, technique, format, description si fournie, lien de l'œuvre
   et lien de sa photo (un e-mail ne peut pas joindre d'image par lien ; une vraie photo jointe demanderait un
   service d'envoi de formulaire, à décider avec la newsletter).
-- Paiement : `LIENS['checkout']` dans `data.py`. Vide = **mode démonstration** (commande simulée, bandeau jaune).
-  Les CGV de l'artiste prévoient Stripe.
-- Prints → Etsy (lien à venir), goodies → Redbubble (boutique Guiarte SMS).
+- Prints → Etsy (lien à venir), avec un menu des 4 formats par print qui met à jour le prix « dès … ».
+- Goodies → Redbubble (boutique Guiarte SMS).
 
 ## Protection des œuvres (demande de l'artiste, 2026-11-05)
 
@@ -100,7 +100,7 @@ des CGV au moment de payer (à ajouter quand le paiement sera branché).
 ## À fournir par l'artiste
 
 Fiche des œuvres (prix, descriptions, histoires, techniques et formats manquants) ; versions HD des 7 petites
-images ; lien Etsy ; service de newsletter ; compte de paiement ; vidéo de présentation pour l'accueil.
+images ; lien Etsy ; service de newsletter ; vidéo de présentation pour l'accueil.
 À trancher : retours 15 jours (FAQ) ou 14 jours (CGV) ; Pinterest @atguiarteofficial (notes) ou @guiarteofficial
 (book) ; la FAQ renvoie à une rubrique actualités qui n'existe pas ; expositions 2017-2019 (FAQ) ou 2020 seulement
 (book, CV) ; galerie « Mundoarti » (book) ou « Munduarti » (CV) ; adresse et numéro d'entreprise pour les CGV.

@@ -430,3 +430,10 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .inquire .note { margin-top: 1.25rem; }
 .inq-close { margin-top: 1rem; padding: 0; border: 0; background: none; font: inherit; color: var(--muted); cursor: pointer; text-decoration: underline; }
 @media (max-width: 480px) { .inquire { padding: 1.5rem; } .inq-actions { grid-template-columns: 1fr; } }
+
+/* Prints : menu des formats (le prix « dès … » suit la taille choisie, voir site.js) */
+.size-field { margin-top: 0.85rem; }
+.size-field label { display: block; margin-bottom: 0.35rem; font-size: 0.9rem; color: var(--muted); }
+.size-field select { width: 100%; font: inherit; font-size: 0.95rem; color: var(--ink); background: #fff; border: 1px solid #c9c5be; border-radius: 2px; padding: 0.55rem 0.7rem; cursor: pointer; }
+.size-field select:focus { outline: none; border-color: var(--jungle); box-shadow: 0 0 0 1px var(--jungle); }
+.product .size-field + .meta { margin-top: 0.6rem; font-size: 1.05rem; color: var(--ink); }

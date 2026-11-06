@@ -14,20 +14,20 @@ import json
 
 from PIL import Image
 
-from data import (COLLABORATIONS, DISTINCTIONS, EXPOSITIONS, FAQ, LIENS, LIVRAISON, OEUVRES, PRESSE,
+from data import (COLLABORATIONS, DISTINCTIONS, EXPOSITIONS, FAQ, LIENS, OEUVRES, PRESSE,
                   PRINT_FORMATS, SERIES)
 from legal import CGV, COURTESY, PRIVACY, UPDATED
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'site'
 LANGS = ['fr', 'nl', 'en']
-PAGES = ['home', 'about', 'gallery', 'prints', 'goodies', 'faq', 'contact', 'cart', 'cgv', 'privacy']
+PAGES = ['home', 'about', 'gallery', 'prints', 'goodies', 'faq', 'contact', 'cgv', 'privacy']
 SLUGS = {
-    'fr': {'home': 'index.html', 'about': 'a-propos.html', 'gallery': 'galerie.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'panier.html',
+    'fr': {'home': 'index.html', 'about': 'a-propos.html', 'gallery': 'galerie.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html',
            'cgv': 'conditions-generales-de-vente.html', 'privacy': 'politique-de-confidentialite.html'},
-    'nl': {'home': 'index.html', 'about': 'over.html', 'gallery': 'galerij.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'winkelmand.html',
+    'nl': {'home': 'index.html', 'about': 'over.html', 'gallery': 'galerij.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html',
            'cgv': 'algemene-verkoopvoorwaarden.html', 'privacy': 'privacybeleid.html'},
-    'en': {'home': 'index.html', 'about': 'about.html', 'gallery': 'gallery.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html', 'cart': 'cart.html',
+    'en': {'home': 'index.html', 'about': 'about.html', 'gallery': 'gallery.html', 'prints': 'prints.html', 'goodies': 'goodies.html', 'faq': 'faq.html', 'contact': 'contact.html',
            'cgv': 'terms-of-sale.html', 'privacy': 'privacy-policy.html'},
 }
 HTML_LANG = {'fr': 'fr-BE', 'nl': 'nl-BE', 'en': 'en'}
@@ -49,15 +49,7 @@ BIO = {
 
 T = {
     'fr': {
-        'cart': 'Panier', 'add_cart': 'Ajouter au panier', 'in_cart': 'Dans le panier — voir', 'buy_now': 'Acheter maintenant',
-        'added': 'Ajouté au panier.', 'see_cart': 'Voir le panier', 'unique': 'Pièce unique, signée, avec certificat',
-        'cart_title': 'Votre panier', 'cart_empty': 'Votre panier est vide.', 'remove': 'Retirer', 'subtotal': 'Sous-total',
-        'delivery': 'Livraison', 'total': 'Total', 'free': 'Offerte',
-        'ship': {'be': 'Belgique, assurée', 'eu': 'Europe, assurée', 'pickup': 'Retrait à l’atelier, sur rendez-vous'},
-        'details': 'Vos coordonnées', 'fn': 'Nom complet', 'fe': 'E-mail', 'fa': 'Adresse', 'fz': 'Code postal', 'fc': 'Ville',
-        'err_req': 'Champ requis.', 'pay': 'Payer', 'secure': 'Paiement sécurisé par carte, Bancontact ou virement. Expédition sous 5 jours ouvrables.',
-        'done_h': 'Merci pour votre commande !', 'done_p': 'Commande n°', 'done_mail': 'Un e-mail de confirmation vous est envoyé avec le suivi de livraison.',
-        'demo': 'Boutique de démonstration : aucun paiement n’est encaissé tant que le prestataire de paiement n’est pas branché.',
+        'unique': 'Pièce unique, signée, avec certificat',
         'nav': {'about': 'À propos', 'gallery': 'Galerie', 'prints': 'Prints', 'goodies': 'Goodies', 'faq': 'FAQ', 'contact': 'Contact'},
         'menu': 'Menu', 'skip': 'Aller au contenu', 'lang_label': 'Langue', 'main_nav': 'Navigation principale', 'home': 'Accueil',
         'title_home': 'Guido De Oliveira, artiste peintre', 'desc_home': 'Œuvres originales, prints et goodies de l’artiste peintre belge Guido De Oliveira.',
@@ -85,7 +77,7 @@ T = {
         'inq_or': 'Ou écrivez directement à',
         'zoom': 'Agrandir l’image', 'close': 'Fermer',
         'p_lead': 'Les œuvres de la galerie en tirages d’art signés, sur papier mat 230 g. Commandez en un clic sur Etsy.',
-        'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter', 'see_original': 'Voir l’original',
+        'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter', 'p_size': 'Format', 'see_original': 'Voir l’original',
         # Catégories et nombre de motifs relevés sur sa boutique Redbubble le 2026-11-05 (150 motifs, 169 produits).
         'gd_lead': 'T-shirts, sweats et vestes à capuche, stickers, posters, impressions artistiques et photo, toiles, mugs, coussins, coques de téléphone, tapis de souris, carnets, tote bags, pochettes, casquettes et bobs, chaussettes, magnets et badges : les œuvres en objets du quotidien, imprimés et livrés par Redbubble.',
         'gd_alt': 'Photomontage de 16 produits de la boutique Guiarte SMS décorés des œuvres de Guido De Oliveira : t-shirt, mug, poster, sticker, coussin, veste à capuche, coque de téléphone, impression artistique, tote bag, casquette, tapis de souris, toile, carnet, chaussettes, magnet et bob',
@@ -106,15 +98,7 @@ T = {
         'rights': 'Tous droits réservés.', 'todo_link': 'Lien à fournir par l’artiste',
     },
     'nl': {
-        'cart': 'Winkelmand', 'add_cart': 'In winkelmand', 'in_cart': 'In je winkelmand — bekijken', 'buy_now': 'Nu kopen',
-        'added': 'Toegevoegd aan je winkelmand.', 'see_cart': 'Bekijk winkelmand', 'unique': 'Uniek stuk, gesigneerd, met certificaat',
-        'cart_title': 'Je winkelmand', 'cart_empty': 'Je winkelmand is leeg.', 'remove': 'Verwijderen', 'subtotal': 'Subtotaal',
-        'delivery': 'Levering', 'total': 'Totaal', 'free': 'Gratis',
-        'ship': {'be': 'België, verzekerd', 'eu': 'Europa, verzekerd', 'pickup': 'Afhalen in het atelier, op afspraak'},
-        'details': 'Je gegevens', 'fn': 'Volledige naam', 'fe': 'E-mail', 'fa': 'Adres', 'fz': 'Postcode', 'fc': 'Gemeente',
-        'err_req': 'Verplicht veld.', 'pay': 'Betalen', 'secure': 'Veilig betalen met kaart, Bancontact of overschrijving. Verzending binnen 5 werkdagen.',
-        'done_h': 'Bedankt voor je bestelling!', 'done_p': 'Bestelling nr.', 'done_mail': 'Je ontvangt een bevestigingsmail met de opvolging van de levering.',
-        'demo': 'Demowinkel: er wordt niets betaald zolang de betaaldienst niet gekoppeld is.',
+        'unique': 'Uniek stuk, gesigneerd, met certificaat',
         'nav': {'about': 'Over mij', 'gallery': 'Galerij', 'prints': 'Prints', 'goodies': 'Goodies', 'faq': 'FAQ', 'contact': 'Contact'},
         'menu': 'Menu', 'skip': 'Naar de inhoud', 'lang_label': 'Taal', 'main_nav': 'Hoofdnavigatie', 'home': 'Home',
         'title_home': 'Guido De Oliveira, kunstschilder', 'desc_home': 'Originele werken, prints en goodies van de Belgische kunstschilder Guido De Oliveira.',
@@ -141,7 +125,7 @@ T = {
         'inq_or': 'Of schrijf rechtstreeks naar',
         'zoom': 'Afbeelding vergroten', 'close': 'Sluiten',
         'p_lead': 'De werken uit de galerij als gesigneerde kunstprints op mat papier van 230 g. Bestel met één klik op Etsy.',
-        'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen', 'see_original': 'Bekijk het origineel',
+        'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen', 'p_size': 'Formaat', 'see_original': 'Bekijk het origineel',
         'gd_lead': 'T-shirts, sweaters en hoodies met rits, stickers, posters, kunst- en fotoprints, canvasprints, mokken, kussens, telefoonhoesjes, muismatten, notitieboeken, draagtassen, etuis, petten en bucket hats, sokken, magneten en buttons: de werken als alledaagse voorwerpen, gedrukt en geleverd door Redbubble.',
         'gd_alt': 'Fotomontage van 16 producten uit de winkel Guiarte SMS met de werken van Guido De Oliveira: T-shirt, mok, poster, sticker, kussen, hoodie met rits, telefoonhoesje, kunstprint, draagtas, pet, muismat, canvasprint, notitieboek, sokken, magneet en bucket hat',
         'gd_go': 'Bekijk de winkel op Redbubble', 'gd_note': 'Meer dan 150 ontwerpen in de winkel Guiarte SMS.',
@@ -161,15 +145,7 @@ T = {
         'rights': 'Alle rechten voorbehouden.', 'todo_link': 'Link aan te leveren door de kunstenaar',
     },
     'en': {
-        'cart': 'Cart', 'add_cart': 'Add to cart', 'in_cart': 'In your cart — view', 'buy_now': 'Buy now',
-        'added': 'Added to your cart.', 'see_cart': 'View cart', 'unique': 'One-off piece, signed, with certificate',
-        'cart_title': 'Your cart', 'cart_empty': 'Your cart is empty.', 'remove': 'Remove', 'subtotal': 'Subtotal',
-        'delivery': 'Delivery', 'total': 'Total', 'free': 'Free',
-        'ship': {'be': 'Belgium, insured', 'eu': 'Europe, insured', 'pickup': 'Studio pick-up, by appointment'},
-        'details': 'Your details', 'fn': 'Full name', 'fe': 'Email', 'fa': 'Address', 'fz': 'Postcode', 'fc': 'City',
-        'err_req': 'Required field.', 'pay': 'Pay', 'secure': 'Secure payment by card, Bancontact or bank transfer. Ships within 5 working days.',
-        'done_h': 'Thank you for your order!', 'done_p': 'Order no.', 'done_mail': 'A confirmation email with delivery tracking is on its way.',
-        'demo': 'Demo shop: no payment is taken until the payment provider is connected.',
+        'unique': 'One-off piece, signed, with certificate',
         'nav': {'about': 'About', 'gallery': 'Gallery', 'prints': 'Prints', 'goodies': 'Goodies', 'faq': 'FAQ', 'contact': 'Contact'},
         'menu': 'Menu', 'skip': 'Skip to content', 'lang_label': 'Language', 'main_nav': 'Main navigation', 'home': 'Home',
         'title_home': 'Guido De Oliveira, painter', 'desc_home': 'Original paintings, prints and goodies by Belgian painter Guido De Oliveira.',
@@ -196,7 +172,7 @@ T = {
         'inq_or': 'Or write directly to',
         'zoom': 'Enlarge image', 'close': 'Close',
         'p_lead': 'The works from the gallery as signed art prints on 230 g matte paper. Order in one click on Etsy.',
-        'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy', 'see_original': 'See the original',
+        'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy', 'p_size': 'Size', 'see_original': 'See the original',
         'gd_lead': 'T-shirts, sweatshirts and zip hoodies, stickers, posters, art and photo prints, canvas prints, mugs, cushions, phone cases, mouse pads, notebooks, tote bags, pouches, caps and bucket hats, socks, magnets and badges: the works on everyday objects, printed and shipped by Redbubble.',
         'gd_alt': 'Photo montage of 16 products from the Guiarte SMS shop featuring Guido De Oliveira’s works: T-shirt, mug, poster, sticker, cushion, zip hoodie, phone case, art print, tote bag, cap, mouse pad, canvas print, notebook, socks, magnet and bucket hat',
         'gd_go': 'Visit the shop on Redbubble', 'gd_note': 'Over 150 designs in the Guiarte SMS shop.',
@@ -335,7 +311,6 @@ def page(lang, key, title, desc, body):
     <nav class="nav" aria-label="{e(t["main_nav"])}"><ul>{nav}</ul></nav>
     <div class="header-right">
       <ul class="langs" aria-label="{e(t["lang_label"])}">{langs}</ul>
-      <a class="cart-link" href="{s["cart"]}">{e(t["cart"])}<span data-cart-count></span></a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="drawer">{e(t["menu"])}</button>
     </div>
   </div>
@@ -361,27 +336,10 @@ def page(lang, key, title, desc, body):
     </div>
   </div>
 </footer>
-<script>window.GDO = {shop_cfg(lang)};</script>
 <script src="../assets/js/site.js" defer></script>
-<script src="../assets/js/cart.js" defer></script>
 </body>
 </html>
 '''
-
-
-LOCALE = {'fr': 'fr-BE', 'nl': 'nl-BE', 'en': 'en-IE'}
-
-
-def shop_cfg(lang):
-    """Données de la boutique transmises au script du panier."""
-    t, s = T[lang], SLUGS[lang]
-    products = {o['id']: {'title': o['titre'], 'price': o['prix'], 'sold': o['vendue'], 'img': img(o, '-600'),
-                          'meta': ', '.join(str(x) for x in (o['tech'] and o['tech'][lang], o['dim'], o['annee']) if x)}
-                for o in OEUVRES if o['prix']}
-    cfg = {'locale': LOCALE[lang], 'cartUrl': s['cart'], 'checkoutUrl': LIENS['checkout'] or '', 'products': products,
-           't': {'addCart': t['add_cart'], 'inCart': t['in_cart'], 'added': t['added'], 'seeCart': t['see_cart'],
-                 'remove': t['remove'], 'unique': t['unique'], 'free': t['free']}}
-    return json.dumps(cfg, ensure_ascii=False).replace('</', '<\\/')
 
 
 def head(title, lead):
@@ -423,9 +381,7 @@ def video_block(lang):
 
 def work_card(o, lang, href):
     t = T[lang]
-    meta = [e(series_name(o['serie'], lang))]
-    if o['annee']:
-        meta.append(str(o['annee']))
+    meta = [e(series_name(o['serie'], lang))]  # sans l'année (demande du 2026-11-06)
     if o['vendue']:
         meta.append(f'<span class="sold-tag">{e(t["sold"])}</span>')
     elif o['prix']:
@@ -542,13 +498,10 @@ def gallery(lang):
             title = o['titre']
             if o['vendue']:
                 buy_block = f'<p class="status sold">{e(t["sold"])}</p><div class="actions"><a class="btn btn-line" href="{s["prints"]}#print-{o["id"]}">{e(t["see_prints"])}</a></div>'
-            elif o['prix']:
-                buy_block = (f'<span class="price">{price(o["prix"], lang)}</span><p class="status">{e(t["unique"])}</p>'
-                             f'<div class="actions"><button type="button" class="btn" data-add="{o["id"]}">{e(t["add_cart"])}</button>'
-                             f'<button type="button" class="btn btn-line" data-buy-now="{o["id"]}">{e(t["buy_now"])}</button></div>'
-                             f'<p class="also"><a class="link" href="{s["prints"]}#print-{o["id"]}">{e(t["see_prints"])}</a></p>')
             else:
-                buy_block = (f'<p class="price-todo"><span class="todo">{e(t["price_todo"])}</span></p><p class="status">{e(t["unique"])}</p>'
+                price_html = (f'<span class="price">{price(o["prix"], lang)}</span>' if o['prix'] else
+                              f'<p class="price-todo"><span class="todo">{e(t["price_todo"])}</span></p>')
+                buy_block = (f'{price_html}<p class="status">{e(t["unique"])}</p>'
                              f'<div class="actions"><a class="btn" {buy_mail(o, lang)}>{e(t["buy"])}</a>'
                              f'<a class="btn btn-line" href="{s["prints"]}#print-{o["id"]}">{e(t["see_prints"])}</a></div>')
             specs = (f'<dt>{e(t["technique"])}</dt><dd>{e(o["tech"][lang]) if o["tech"] else todo(t)}</dd>'
@@ -575,6 +528,14 @@ def gallery(lang):
     return page(lang, 'gallery', f'{t["g_title"]} | Guido De Oliveira', t['g_lead'], body)
 
 
+def size_select(o, lang):
+    """Menu des formats d'un print ; site.js met à jour le prix « dès … » affiché sous le menu."""
+    t = T[lang]
+    opts = ''.join(f'<option value="{i}" data-price="{e(t["from"].format(p=price(p, lang)))}">{e(n[lang])}, {d}</option>'
+                   for i, (n, d, p) in enumerate(PRINT_FORMATS))
+    return f'<select id="size-{o["id"]}" data-size>{opts}</select>'
+
+
 def prints(lang):
     t, s = T[lang], SLUGS[lang]
     formats = ''.join(f'<li><span>{e(n[lang])} <small>{d}</small></span><strong>{e(t["from"].format(p=price(p, lang)))}</strong></li>'
@@ -582,7 +543,8 @@ def prints(lang):
     cards = ''.join(f'''<li class="product" id="print-{o["id"]}">
   {mock_print(o, lang)}
   <h3>{e(o["titre"])}</h3>
-  <p class="meta">{e(t["from"].format(p=price(PRINT_FORMATS[0][2], lang)))}</p>
+  <div class="size-field"><label for="size-{o["id"]}">{e(t["p_size"])}</label>{size_select(o, lang)}</div>
+  <p class="meta" data-size-price>{e(t["from"].format(p=price(PRINT_FORMATS[0][2], lang)))}</p>
   <div class="product-actions"><a class="btn" {ext("etsy", t)}>{e(t["buy_etsy"])}</a><a class="link" href="{s["gallery"]}#{o["id"]}">{e(t["see_original"])}</a></div>
 </li>''' for o in OEUVRES)
     body = f'''
@@ -783,59 +745,7 @@ def splash():
 '''
 
 
-def cart(lang):
-    t, s = T[lang], SLUGS[lang]
-    ship = ''.join(
-        f'<label class="ship"><input type="radio" name="delivery" value="{k}" data-price="{v}"{" checked" if i == 0 else ""}>'
-        f'<span>{e(t["ship"][k])}</span><strong>{price(v, lang) if v else e(t["free"])}</strong></label>'
-        for i, (k, v) in enumerate(LIVRAISON))
-
-    def field(n, label, typ='text', auto='', addr=False):
-        err = t['f_err_email'] if n == 'email' else t['err_req']
-        return (f'<div class="field"{" data-address" if addr else ""}><label for="co-{n}">{e(label)}</label>'
-                f'<input id="co-{n}" name="{n}" type="{typ}" autocomplete="{auto}" required><p class="error" hidden>{e(err)}</p></div>')
-
-    demo = '' if LIENS['checkout'] else f'<p class="demo-note">{e(t["demo"])}</p>'
-    body = f"""
-<div class="wrap page-head"><h1>{e(t["cart_title"])}</h1></div>
-<section class="wrap cart-page">
-  <div id="cart-empty" hidden><p class="lead">{e(t["cart_empty"])}</p><p class="spaced"><a class="btn" href="{s["gallery"]}">{e(t["cta_gallery"])}</a></p></div>
-  <div id="cart-full" class="cart-grid" hidden>
-    <div>
-      <ul id="cart" class="cart-list"></ul>
-      <form id="checkout" class="form checkout" novalidate>
-        <h2 id="commande">{e(t["details"])}</h2>
-        {field("name", t["fn"], auto="name")}
-        {field("email", t["fe"], "email", "email")}
-        <fieldset class="ships"><legend>{e(t["delivery"])}</legend>{ship}</fieldset>
-        {field("address", t["fa"], auto="street-address", addr=True)}
-        <div class="form-row">{field("zip", t["fz"], auto="postal-code", addr=True)}{field("city", t["fc"], auto="address-level2", addr=True)}</div>
-        <button class="btn btn-pay" type="submit">{e(t["pay"])}&nbsp;<span id="pay-amount"></span></button>
-        <p class="note">{e(t["secure"])}</p>
-        {demo}
-      </form>
-    </div>
-    <aside class="summary">
-      <dl>
-        <div><dt>{e(t["subtotal"])}</dt><dd id="sum-sub"></dd></div>
-        <div><dt>{e(t["delivery"])}</dt><dd id="sum-ship"></dd></div>
-        <div class="sum-total"><dt>{e(t["total"])}</dt><dd id="sum-total"></dd></div>
-      </dl>
-      <p class="note">{e(t["unique"])}</p>
-    </aside>
-  </div>
-  <div id="order-done" class="order-done" hidden>
-    <h2>{e(t["done_h"])}</h2>
-    <p class="lead">{e(t["done_p"])} <strong id="order-number"></strong></p>
-    <p>{e(t["done_mail"])}</p>
-    {demo}
-    <p class="spaced"><a class="btn" href="{s["gallery"]}">{e(t["cta_gallery"])}</a></p>
-  </div>
-</section>"""
-    return page(lang, 'cart', f'{t["cart_title"]} | Guido De Oliveira', t['cart_title'], body)
-
-
-BUILDERS = {'home': home, 'about': about, 'gallery': gallery, 'prints': prints, 'goodies': goodies, 'faq': faq, 'contact': contact, 'cart': cart,
+BUILDERS = {'home': home, 'about': about, 'gallery': gallery, 'prints': prints, 'goodies': goodies, 'faq': faq, 'contact': contact,
             'cgv': lambda lang: legal_page(lang, 'cgv', CGV[lang]),
             'privacy': lambda lang: legal_page(lang, 'privacy', PRIVACY[lang])}
 

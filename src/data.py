@@ -16,11 +16,7 @@ LIENS = {
     'email': 'info@guidodeoliveira.com',
     'newsletter': None,
     'video': 'assets/video/a-propos.mp4',
-    'checkout': None,  # paiement en ligne (Stripe, d'après les CGV) ; None = mode démonstration
 }
-
-# Livraison des originaux (montants de démonstration ; CGV : offerte dès 75 € HTVA, sinon selon destination et poids)
-LIVRAISON = [('be', 0), ('eu', 49), ('pickup', 0)]
 
 # ── Séries, dans l'ordre voulu par l'artiste ──
 SERIES = [

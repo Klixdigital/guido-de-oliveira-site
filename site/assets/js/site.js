@@ -53,6 +53,12 @@
     });
   });
 
+  // Prints : le prix « dès … » suit le format choisi dans le menu
+  document.querySelectorAll('select[data-size]').forEach(function (sel) {
+    var out = sel.closest('.product').querySelector('[data-size-price]');
+    sel.addEventListener('change', function () { out.textContent = sel.options[sel.selectedIndex].getAttribute('data-price'); });
+  });
+
   // Zoom des œuvres
   var box = document.querySelector('.lightbox');
   if (box && box.showModal) {
