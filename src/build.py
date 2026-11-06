@@ -580,6 +580,7 @@ VIDEO_VERSIONS = [
     ('presentation-v1.mp4', 'Version 1 · Galerie', 'Piano et cordes, rythme lent'),
     ('presentation-v2.mp4', 'Version 2 · Cosmos', 'Ambiance électronique, œuvres cosmiques'),
     ('presentation-v3.mp4', 'Version 3 · Atelier', 'Guitare acoustique, Guido à l’atelier'),
+    ('presentation-v4.mp4', 'Version 4 · Guido peint', 'Guitare acoustique, ~12 s de Guido au travail puis l’œuvre finie'),
 ]
 
 
