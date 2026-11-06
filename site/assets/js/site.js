@@ -75,6 +75,32 @@
     box.addEventListener('click', function (e) { if (e.target === box) box.close(); });
   }
 
+  // À propos : dernières publications Instagram, depuis un flux JSON (format Behold : { posts: [...] } ou tableau).
+  // Sans flux ou en cas d'erreur, le carrousel reste caché : seul le bouton « @guiarteofficial » s'affiche.
+  var ig = document.querySelector('.ig[data-ig-feed]');
+  if (ig && ig.getAttribute('data-ig-feed')) {
+    var track = ig.querySelector('.ig-track');
+    fetch(ig.getAttribute('data-ig-feed')).then(function (r) { return r.json(); }).then(function (data) {
+      var posts = (Array.isArray(data) ? data : data.posts || []).slice(0, 12);
+      posts.forEach(function (p) {
+        var src = (p.sizes && p.sizes.medium && p.sizes.medium.mediaUrl) || p.thumbnailUrl || p.mediaUrl;
+        if (!src || !p.permalink) return;
+        var li = document.createElement('li'), a = document.createElement('a'), im = document.createElement('img');
+        a.href = p.permalink; a.target = '_blank'; a.rel = 'noopener';
+        im.src = src; im.loading = 'lazy';
+        var cap = (p.prunedCaption || p.caption || '').replace(/\s+/g, ' ').trim();
+        im.alt = cap ? cap.slice(0, 140) : ig.getAttribute('data-ig-alt');
+        a.appendChild(im); li.appendChild(a); track.appendChild(li);
+      });
+      if (track.children.length) ig.hidden = false;
+    }).catch(function () {});
+    ig.querySelectorAll('[data-ig]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        track.scrollBy({ left: (b.getAttribute('data-ig') === 'next' ? 1 : -1) * track.clientWidth, behavior: 'smooth' });
+      });
+    });
+  }
+
   // Galerie : l'année à l'écran est soulignée dans la barre des années
   var yearLinks = document.querySelectorAll('.years a');
   if (yearLinks.length && 'IntersectionObserver' in window) {

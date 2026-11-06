@@ -28,7 +28,9 @@ python src/build.py    # (sans -I : le script importe data.py)
 ```
 
 Menu : À propos · Galerie · Prints · Goodies · FAQ · Contact (plus de panier depuis le 2026-11-06). Pied de page : CGV · Politique de confidentialité.
-« À propos » se termine par **Expositions et distinctions** (book 2025 p. 19 + CV).
+« À propos » se termine par **Expositions et distinctions** (book 2025 p. 19 + CV), puis **Sur Instagram** : carrousel
+rempli depuis `LIENS['instagram_feed']` (flux JSON type Behold, à relier au compte de Guido) ; vide = bouton « Suivre » seul.
+Textes des œuvres : `DESCRIPTIONS` (CV, 4 œuvres) et `HISTOIRES` (book, 8 œuvres) dans `data.py`.
 
 ## Pages légales (2026-11-05)
 
@@ -47,7 +49,8 @@ directe à l'artiste.
 - **Prints** : bouton « Acheter » (pas « Acheter sur Etsy ») ; formats Petit 30×40 / Moyen 40×50 / Grand 45×61 /
   Très grand 61×81, prix « à partir de », provisoires.
 - **Goodies** : un seul photomontage de ses produits Redbubble puis le lien vers la boutique, pas de catalogue.
-  Montage refait le 2026-11-05 depuis sa boutique (150 motifs, 169 produits) : 16 produits réels, un par catégorie,
+  Montage refait le 2026-11-05 depuis sa boutique (150 motifs, 169 produits), porté à 24 produits (6 rangées de 4) le 2026-11-06 ;
+  l'accueil garde un carré des 16 premiers (`goodies-carte.webp`). Produits réels,
   uniquement ses propres œuvres ; le texte liste toutes les catégories en vente, sans prix (ils changent avec les
   promos Redbubble). Pas de sac à dos dans sa boutique, contrairement à ses notes. Ancien montage gardé dans
   `source/goodies-ancien-2026-11-05/`. Sa boutique contient aussi du fan art (Star Wars, Iron Man, Shaun le mouton) :

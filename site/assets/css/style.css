@@ -426,3 +426,14 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .print-visual { position: relative; }
 .mock-zoom { position: absolute; inset: 0; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; }
 .mock-zoom:focus-visible { outline: 2px solid var(--jungle); outline-offset: 4px; }
+
+/* À propos : carrousel Instagram (rempli par site.js depuis LIENS['instagram_feed']) */
+.ig-track { list-style: none; margin: 0; padding: 0 0 0.25rem; display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.ig-track::-webkit-scrollbar { display: none; }
+@media (min-width: 700px) { .ig-track { grid-auto-columns: calc((100% - 2rem) / 3); } }
+@media (min-width: 1100px) { .ig-track { grid-auto-columns: calc((100% - 3rem) / 4); } }
+.ig-track li { scroll-snap-align: start; }
+.ig-track a { display: block; aspect-ratio: 1; background: #fff; }
+.ig-track img { width: 100%; height: 100%; object-fit: contain; }  /* jamais recadré : une publication peut être une œuvre */
+.ig-nav { display: flex; justify-content: flex-end; gap: 1.5rem; margin-top: 1rem; }
+.ig-nav button { padding: 0; border: 0; background: none; font: inherit; color: var(--ink); cursor: pointer; text-decoration: underline; }

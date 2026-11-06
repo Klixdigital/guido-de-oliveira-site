@@ -75,7 +75,7 @@ T = {
         'p_formats': 'Formats et prix', 'from': 'dès {p}', 'buy_etsy': 'Acheter', 'p_size': 'Format', 'see_original': 'Voir l’original',
         # Catégories et nombre de motifs relevés sur sa boutique Redbubble le 2026-11-05 (150 motifs, 169 produits).
         'gd_lead': 'T-shirts, sweats et vestes à capuche, stickers, posters, impressions artistiques et photo, toiles, mugs, coussins, coques de téléphone, tapis de souris, carnets, tote bags, pochettes, casquettes et bobs, chaussettes, magnets et badges : les œuvres en objets du quotidien, imprimés et livrés par Redbubble.',
-        'gd_alt': 'Photomontage de 16 produits de la boutique Guiarte SMS décorés des œuvres de Guido De Oliveira : t-shirt, mug, poster, sticker, coussin, veste à capuche, coque de téléphone, impression artistique, tote bag, casquette, tapis de souris, toile, carnet, chaussettes, magnet et bob',
+        'gd_alt': 'Photomontage de produits de la boutique Guiarte SMS décorés des œuvres de Guido De Oliveira : t-shirts, mugs, posters, stickers, coussin, sweats à capuche, coque de téléphone, impressions artistique et photo, tote bag, casquette, tapis de souris, toile, carnet, chaussettes, magnet, bob, pochette et badge',
         'gd_go': 'Voir la boutique sur Redbubble', 'gd_note': 'Plus de 150 motifs dans la boutique Guiarte SMS.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Pulls', 'cadre': 'Cadres'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Pull à capuche', 'cadre': 'Cadre'},
@@ -84,6 +84,7 @@ T = {
         'faq_more': 'Une autre question ?', 'faq_write': 'Écrivez-moi',
         'a_title': 'À propos', 'a_portrait': 'Guido De Oliveira peint dans son atelier, casque sur les oreilles, entouré de ses toiles',
         'a_video': 'Regarder la vidéo',
+        'ig_h': 'Sur Instagram', 'ig_p': 'Les dernières publications de Guido.', 'ig_prev': 'Précédentes', 'ig_next': 'Suivantes', 'ig_alt': 'Publication Instagram de Guido De Oliveira',
         'ex_h': 'Expositions et distinctions', 'ex_shows': 'Expositions collectives', 'ex_awards': 'Distinction',
         'ex_press': 'Œuvres parues dans', 'ex_collab': 'Collaborations', 'legal': 'Informations légales',
         'months': ('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'),
@@ -118,7 +119,7 @@ T = {
         'p_lead': 'De werken uit de galerij als gesigneerde kunstprints op mat papier van 230 g. Bestel met één klik op Etsy.',
         'p_formats': 'Formaten en prijzen', 'from': 'vanaf {p}', 'buy_etsy': 'Kopen', 'p_size': 'Formaat', 'see_original': 'Bekijk het origineel',
         'gd_lead': 'T-shirts, sweaters en hoodies met rits, stickers, posters, kunst- en fotoprints, canvasprints, mokken, kussens, telefoonhoesjes, muismatten, notitieboeken, draagtassen, etuis, petten en bucket hats, sokken, magneten en buttons: de werken als alledaagse voorwerpen, gedrukt en geleverd door Redbubble.',
-        'gd_alt': 'Fotomontage van 16 producten uit de winkel Guiarte SMS met de werken van Guido De Oliveira: T-shirt, mok, poster, sticker, kussen, hoodie met rits, telefoonhoesje, kunstprint, draagtas, pet, muismat, canvasprint, notitieboek, sokken, magneet en bucket hat',
+        'gd_alt': 'Fotomontage van producten uit de winkel Guiarte SMS met de werken van Guido De Oliveira: T-shirts, mokken, posters, stickers, kussen, hoodies, telefoonhoesje, kunst- en fotoprint, draagtas, pet, muismat, canvasprint, notitieboek, sokken, magneet, bucket hat, etui en button',
         'gd_go': 'Bekijk de winkel op Redbubble', 'gd_note': 'Meer dan 150 ontwerpen in de winkel Guiarte SMS.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Truien', 'cadre': 'Kaders'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Hoodie', 'cadre': 'Kader'},
@@ -127,6 +128,7 @@ T = {
         'faq_more': 'Nog een vraag?', 'faq_write': 'Schrijf me',
         'a_title': 'Over mij', 'a_portrait': 'Guido De Oliveira schildert in zijn atelier, met een koptelefoon op, omringd door zijn doeken',
         'a_video': 'Bekijk de video',
+        'ig_h': 'Op Instagram', 'ig_p': 'De nieuwste berichten van Guido.', 'ig_prev': 'Vorige', 'ig_next': 'Volgende', 'ig_alt': 'Instagrambericht van Guido De Oliveira',
         'ex_h': 'Tentoonstellingen en onderscheidingen', 'ex_shows': 'Groepstentoonstellingen', 'ex_awards': 'Onderscheiding',
         'ex_press': 'Werk verschenen in', 'ex_collab': 'Samenwerkingen', 'legal': 'Juridische informatie',
         'months': ('januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'),
@@ -161,7 +163,7 @@ T = {
         'p_lead': 'The works from the gallery as signed art prints on 230 g matte paper. Order in one click on Etsy.',
         'p_formats': 'Sizes and prices', 'from': 'from {p}', 'buy_etsy': 'Buy', 'p_size': 'Size', 'see_original': 'See the original',
         'gd_lead': 'T-shirts, sweatshirts and zip hoodies, stickers, posters, art and photo prints, canvas prints, mugs, cushions, phone cases, mouse pads, notebooks, tote bags, pouches, caps and bucket hats, socks, magnets and badges: the works on everyday objects, printed and shipped by Redbubble.',
-        'gd_alt': 'Photo montage of 16 products from the Guiarte SMS shop featuring Guido De Oliveira’s works: T-shirt, mug, poster, sticker, cushion, zip hoodie, phone case, art print, tote bag, cap, mouse pad, canvas print, notebook, socks, magnet and bucket hat',
+        'gd_alt': 'Photo montage of products from the Guiarte SMS shop featuring Guido De Oliveira’s works: T-shirts, mugs, posters, stickers, cushion, hoodies, phone case, art and photo prints, tote bag, cap, mouse pad, canvas print, notebook, socks, magnet, bucket hat, pouch and badge',
         'gd_go': 'Visit the shop on Redbubble', 'gd_note': 'Over 150 designs in the Guiarte SMS shop.',
         'gd_types': {'tshirt': 'T-shirts', 'pull': 'Hoodies', 'cadre': 'Frames'},
         'gd_one': {'tshirt': 'T-shirt', 'pull': 'Hoodie', 'cadre': 'Frame'},
@@ -170,6 +172,7 @@ T = {
         'faq_more': 'Another question?', 'faq_write': 'Write to me',
         'a_title': 'About', 'a_portrait': 'Guido De Oliveira painting in his studio, headphones on, surrounded by his canvases',
         'a_video': 'Watch the video',
+        'ig_h': 'On Instagram', 'ig_p': 'Guido’s latest posts.', 'ig_prev': 'Previous', 'ig_next': 'Next', 'ig_alt': 'Instagram post by Guido De Oliveira',
         'ex_h': 'Exhibitions and awards', 'ex_shows': 'Group exhibitions', 'ex_awards': 'Award',
         'ex_press': 'Work featured in', 'ex_collab': 'Collaborations', 'legal': 'Legal information',
         'months': ('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
@@ -436,7 +439,7 @@ def home(lang):
     </a>
     <a class="shop shop-alt" href="{s["goodies"]}">
       <div><h3>{e(t["nav"]["goodies"])}</h3><p>{e(t["goodies_p"])}</p></div>
-      <div class="shop-visual"><img class="shop-montage" src="../assets/img/goodies-800.webp" width="800" height="800" alt="{e(t["gd_alt"])}" loading="lazy"></div>
+      <div class="shop-visual"><img class="shop-montage" src="../assets/img/goodies-carte.webp" width="800" height="800" alt="{e(t["gd_alt"])}" loading="lazy"></div>
       <span class="go">{e(t["goodies_go"])}</span>
     </a>
   </div>
@@ -524,7 +527,7 @@ def goodies(lang):
     body = f'''
 {head(t["nav"]["goodies"], t["gd_lead"])}
 <section class="wrap goodies-shop">
-  <a class="goodies-montage" {ext("redbubble", t)}><img src="../assets/img/goodies.webp" srcset="../assets/img/goodies-800.webp 800w, ../assets/img/goodies.webp 1600w" sizes="(min-width: 900px) 46rem, 100vw" width="1600" height="1600" alt="{e(t["gd_alt"])}"></a>
+  <a class="goodies-montage" {ext("redbubble", t)}><img src="../assets/img/goodies.webp" srcset="../assets/img/goodies-800.webp 800w, ../assets/img/goodies.webp 1600w" sizes="(min-width: 900px) 46rem, 100vw" width="1600" height="2404" alt="{e(t["gd_alt"])}"></a>
   <div class="goodies-cta">
     <a class="btn" {ext("redbubble", t)}>{e(t["gd_go"])}</a>
     <p class="note">{e(t["gd_note"])}</p>
@@ -566,8 +569,26 @@ def about(lang):
     {video_block(lang)}
   </div>
 </section>
-{exhibitions(lang)}'''
+{exhibitions(lang)}
+{instagram(lang)}'''
     return page(lang, 'about', f'{t["a_title"]} | Guido De Oliveira', BIO[lang], body)
+
+
+def instagram(lang):
+    """« Sur Instagram » (page À propos) : carrousel des dernières publications, rempli par site.js depuis
+    LIENS['instagram_feed'] (flux JSON relié au compte de Guido). Sans flux : titre et bouton « Suivre » seuls."""
+    t = T[lang]
+    feed = LIENS.get('instagram_feed') or ''
+    handle = '@' + LIENS['instagram'].rstrip('/').rsplit('/', 1)[-1]
+    return f'''<section class="section section-wall" id="instagram">
+  <div class="wrap">
+    <div class="section-head"><div><h2>{e(t["ig_h"])}</h2><p class="lead">{e(t["ig_p"])}</p></div><a class="btn btn-line" {ext("instagram", t)}>{e(handle)}</a></div>
+    <div class="ig" data-ig-feed="{e(feed)}" data-ig-alt="{e(t["ig_alt"])}" hidden>
+      <ul class="ig-track"></ul>
+      <div class="ig-nav"><button type="button" class="link" data-ig="prev">{e(t["ig_prev"])}</button><button type="button" class="link" data-ig="next">{e(t["ig_next"])}</button></div>
+    </div>
+  </div>
+</section>'''
 
 
 def month_year(d, lang):

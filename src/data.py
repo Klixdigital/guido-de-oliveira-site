@@ -1,8 +1,9 @@
 """Contenu du site, tiré des fichiers de l'artiste (2026-11-05) :
 - « Oeuvres originales disponibles/ » : les œuvres, rangées par série ;
 - « more info/ » : notes sur la maquette (NotesSiteWeb_2.odt), FAQ.pdf, book 2025 et CV (années, techniques, formats).
-Une valeur à None s'affiche « à fournir » sur le site. Les prix, descriptions et histoires des œuvres
-viendront d'une fiche séparée de l'artiste : ne rien inventer en attendant.
+Une valeur à None s'affiche « à fournir » sur le site. Descriptions (CV) et histoires (book) : 8 œuvres, voir
+DESCRIPTIONS et HISTOIRES. Les prix et les textes manquants viendront d'une fiche séparée de l'artiste : ne rien
+inventer en attendant.
 """
 
 # ── Liens (None = message « lien à fournir » au clic) ──
@@ -16,6 +17,8 @@ LIENS = {
     'email': 'info@guidodeoliveira.com',
     'newsletter': None,
     'video': 'assets/video/a-propos.mp4',
+    # Flux JSON des dernières publications Instagram (ex. Behold.so, compte de Guido à relier). None = bouton « Suivre » seul.
+    'instagram_feed': None,
 }
 
 # ── Séries, dans l'ordre voulu par l'artiste ──
@@ -128,6 +131,70 @@ OEUVRES = [
         'nl': 'Golf die breekt bij zonsondergang en overgaat in een sterrenhemel',
         'en': 'Wave breaking at sunset and turning into a starry sky'}, 2024, 'toile', '40 × 40 cm'),
 ]
+
+# ── Textes de l'artiste sur ses œuvres (FR repris tels quels, coquilles corrigées ; NL et EN : nos traductions,
+#    à faire valider). Les œuvres absentes de ces documents restent sans texte en attendant sa fiche. ──
+
+# Description : CV (« Sélection d'œuvres », 4 œuvres).
+DESCRIPTIONS = {
+    'glory-of-the-past-2': {
+        'fr': 'Une automobile ancienne abandonnée dans la végétation, issue de la série Glory of the Past, consacrée aux lieux et aux objets oubliés. La scène met en tension la mémoire industrielle, le passage du temps et la reprise du vivant.',
+        'nl': 'Een oude auto, achtergelaten tussen het groen, uit de reeks Glory of the Past, gewijd aan vergeten plekken en voorwerpen. De scène zet het industriële geheugen, het verstrijken van de tijd en de terugkeer van de natuur tegenover elkaar.',
+        'en': 'A vintage car abandoned in the undergrowth, from the Glory of the Past series, devoted to forgotten places and objects. The scene sets industrial memory, the passing of time and nature’s return against one another.'},
+    'candies': {
+        'fr': 'Une étude de la transparence et de la lumière sur le verre. La bonbonnière devient une scène de couleur, de matière et de reflets, où l’abondance sucrée dialogue avec la précision hyperréaliste.',
+        'nl': 'Een studie van transparantie en licht op glas. De snoeppot wordt een scène van kleur, textuur en weerspiegelingen, waarin zoete overvloed en hyperrealistische precisie met elkaar in dialoog gaan.',
+        'en': 'A study of transparency and light on glass. The sweet jar becomes a scene of colour, texture and reflections, where sugary abundance meets hyperrealist precision.'},
+    'the-cosmic-cat': {
+        'fr': 'Une figure féline au cœur d’un paysage nocturne et fleuri. L’animal, motif récurrent de l’artiste, devient une présence presque cosmique, à la fois sauvage, contemplative et mystérieuse.',
+        'nl': 'Een katachtige figuur in het hart van een nachtelijk, bloeiend landschap. Het dier, een terugkerend motief van de kunstenaar, wordt een bijna kosmische aanwezigheid, tegelijk wild, beschouwend en mysterieus.',
+        'en': 'A feline figure at the heart of a flowering night landscape. The animal, a recurring motif for the artist, becomes an almost cosmic presence, at once wild, contemplative and mysterious.'},
+    'wave-at-sunset': {
+        'fr': 'Une vision de la mer où le coucher de soleil, la vague et le ciel se fondent dans un mouvement de transformation. La mémoire des plages portugaises se traduit par une palette intense et une énergie presque planétaire.',
+        'nl': 'Een beeld van de zee waarin zonsondergang, golf en hemel samensmelten in een beweging van verandering. De herinnering aan de Portugese stranden vertaalt zich in een intens palet en een bijna planetaire energie.',
+        'en': 'A vision of the sea where sunset, wave and sky merge in a movement of transformation. Memories of Portuguese beaches come through in an intense palette and an almost planetary energy.'},
+}
+
+# Histoire : book 2025 (« Galerie », pp. 8-17), dans les mots de l'artiste.
+HISTOIRES = {
+    'glory-of-the-past-2': {
+        'fr': 'Ce chef-d’œuvre est le numéro deux de la saga « Gloire du passé » !',
+        'nl': 'Dit werk is nummer twee uit de reeks “Glorie van het verleden”!',
+        'en': 'This piece is number two in the “Glory of the Past” saga!'},
+    'glory-of-the-past-4': {
+        'fr': 'Pour ce chef-d’œuvre, numéro quatre de la saga « Glory of the Past », j’ai puisé mon inspiration dans la série télévisée culte des années 70, « CHiPs ».',
+        'nl': 'Voor dit werk, nummer vier uit de reeks “Glory of the Past”, liet ik me inspireren door de cultserie uit de jaren 70, “CHiPs”.',
+        'en': 'For this piece, number four in the “Glory of the Past” saga, I drew my inspiration from the cult 1970s TV series “CHiPs”.'},
+    'glory-of-the-past-5': {
+        'fr': 'Cette toile est le numéro cinq de la saga « Gloire du passé ». Ici, j’ai puisé mon inspiration dans une image qui m’a ébloui, gamin, lors d’une escapade à l’Atomium de Bruxelles.',
+        'nl': 'Dit doek is nummer vijf uit de reeks “Glorie van het verleden”. Hier liet ik me inspireren door een beeld dat me als kind verblindde tijdens een uitstapje naar het Atomium in Brussel.',
+        'en': 'This canvas is number five in the “Glory of the Past” saga. Here I drew on an image that dazzled me as a kid during a trip to the Atomium in Brussels.'},
+    'methuselah': {
+        'fr': 'Un toast à l’arbre le plus âgé de la planète !',
+        'nl': 'Een toast op de oudste boom van de planeet!',
+        'en': 'A toast to the oldest tree on the planet!'},
+    'candies': {
+        'fr': 'J’ai un faible pour tout ce qui brille en verre et pour la danse de la lumière sur ce matériau. Quant à cette bonbonnière, son contenu sucré m’a donné un bon coup de sucre !',
+        'nl': 'Ik heb een zwak voor alles wat in glas schittert en voor de dans van het licht op dat materiaal. En de zoete inhoud van deze snoeppot gaf me een flinke suikerstoot!',
+        'en': 'I have a soft spot for anything that sparkles in glass and for the dance of light on it. As for this sweet jar, its sugary contents gave me quite a sugar rush!'},
+    'reflections': {
+        'fr': 'Pour ce chef-d’œuvre, j’ai puisé mon inspiration dans un paysage enchanteur de Nouvelle-Zélande.',
+        'nl': 'Voor dit werk liet ik me inspireren door een betoverend landschap in Nieuw-Zeeland.',
+        'en': 'For this piece, I drew my inspiration from an enchanting landscape in New Zealand.'},
+    'the-cosmic-cat': {
+        'fr': 'Cette toile est une ode à mon adoration pour les félins. Au début, un pote m’avait confié qu’il serait ravi de voir un tableau d’un chat sauvage qu’il avait vu en photo. Mais son souhait s’est vite envolé, se métamorphosant en une aventure artistique personnelle pour moi.',
+        'nl': 'Dit doek is een ode aan mijn liefde voor katachtigen. Eerst vertelde een vriend me dat hij graag een schilderij zou zien van een wilde kat die hij op een foto had gezien. Maar zijn wens verdween al snel en veranderde in een persoonlijk artistiek avontuur voor mij.',
+        'en': 'This canvas is an ode to my love of felines. At first, a friend told me he would love to see a painting of a wild cat he had seen in a photo. But his wish soon faded away, turning into a personal artistic adventure for me.'},
+    'wave-at-sunset': {
+        'fr': 'Après avoir passé une éternité de mes étés à flâner sur les plages portugaises, il n’est guère surprenant que la mer et ses vagues aient fini par me marquer profondément.',
+        'nl': 'Na eindeloze zomers op de Portugese stranden is het geen verrassing dat de zee en haar golven een diepe indruk op me hebben nagelaten.',
+        'en': 'After spending an eternity of summers wandering along Portuguese beaches, it is hardly surprising that the sea and its waves ended up leaving a deep mark on me.'},
+}
+
+for _o in OEUVRES:
+    _o['desc'] = DESCRIPTIONS.get(_o['id'])
+    _o['histoire'] = HISTOIRES.get(_o['id'])
+assert set(DESCRIPTIONS) | set(HISTOIRES) <= {o['id'] for o in OEUVRES}, 'identifiant d’œuvre inconnu'
 
 # ── Prints : tirages d'art (vendus sur Etsy) — prix « à partir de », à revoir par l'artiste avec son fournisseur ──
 PRINT_FORMATS = [

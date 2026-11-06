@@ -8,7 +8,8 @@
   de la vue agrandie ; droits d'auteur dans les métadonnées. Police : source/fonts/Philosopher-Regular.ttf.
 - Atelier : source/raw-atelier-reel.webp (Mepainting.webp de l'artiste) → assets/img/atelier.webp
 - Goodies : source/goodies/* (photos de sa boutique Redbubble, 600 × 600, une par catégorie de produit,
-  relevées le 2026-11-05) → assets/img/goodies.webp, photomontage de 4 colonnes dans l'ordre des noms de fichiers.
+  relevées le 2026-11-05 et 2026-11-06) → assets/img/goodies.webp (toutes, 4 colonnes) et goodies-carte.webp
+  (les 16 premières, carré, pour l'accueil), dans l'ordre des noms de fichiers.
 """
 from functools import lru_cache
 from pathlib import Path
@@ -104,16 +105,29 @@ def atelier():
         print('atelier', save(Image.open(src).convert('RGB'), IMG / 'atelier.webp', 1080, 82))
 
 
-def goodies(cols=4, tile=600, gap=12, bg=(244, 243, 241)):
-    tiles = sorted(p for p in (ROOT / 'source' / 'goodies').iterdir() if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'))
-    if not tiles:
-        return
+def montage(tiles, cols=4, tile=600, gap=12, bg=(244, 243, 241)):
     rows = -(-len(tiles) // cols)
     sheet = Image.new('RGB', (cols * tile + (cols - 1) * gap, rows * tile + (rows - 1) * gap), bg)
     for i, f in enumerate(tiles):
         t = ImageOps.fit(Image.open(f).convert('RGB'), (tile, tile), Image.LANCZOS)
         sheet.paste(t, ((i % cols) * (tile + gap), (i // cols) * (tile + gap)))
-    print('goodies', save(sheet, IMG / 'goodies.webp', 1600, 80), save(sheet, IMG / 'goodies-800.webp', 800, 78))
+    return sheet
+
+
+def save_width(im, path, width, q):
+    out = im.resize((width, round(im.height * width / im.width)), Image.LANCZOS)
+    out.save(path, 'WEBP', quality=q, method=6)
+    return out.size
+
+
+def goodies():
+    """Page Goodies : toutes les tuiles, 4 colonnes (24 = 6 rangées). Carte de l'accueil : les 16 premières, en carré."""
+    tiles = sorted(p for p in (ROOT / 'source' / 'goodies').iterdir() if p.suffix.lower() in ('.jpg', '.jpeg', '.png', '.webp'))
+    if not tiles:
+        return
+    page = montage(tiles)
+    print('goodies', save_width(page, IMG / 'goodies.webp', 1600, 80), save_width(page, IMG / 'goodies-800.webp', 800, 78))
+    print('carte accueil', save_width(montage(tiles[:16]), IMG / 'goodies-carte.webp', 800, 78))
 
 
 if __name__ == '__main__':
