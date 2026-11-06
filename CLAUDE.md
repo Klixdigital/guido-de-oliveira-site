@@ -72,12 +72,12 @@ directe à l'artiste.
   lien de paiement supprimés. Chaque original se vend par demande directe à l'artiste, prix affiché s'il est connu.
 - Les CGV et la politique de confidentialité de l'artiste décrivent encore une commande en ligne (paiement Stripe,
   « produits ajoutés au panier ») : à faire adapter par l'artiste, ne pas réécrire son texte légal de notre propre chef.
-- « Acquérir l'original » (œuvre sans prix) ouvre une **fenêtre** (`inquiry_dialog` + `site.js`) : Gmail, Outlook,
-  appli de messagerie ou copie du message. Un simple lien mailto ne faisait rien sur un PC sans logiciel de
-  messagerie configuré. Le message reprend série, année, technique, format, description si fournie, lien de l'œuvre
-  et lien de sa photo (un e-mail ne peut pas joindre d'image par lien ; une vraie photo jointe demanderait un
-  service d'envoi de formulaire, à décider avec la newsletter).
-- Prints → Etsy (lien à venir), avec un menu des 4 formats par print qui met à jour le prix « dès … ».
+- « Acquérir l'original » ouvre **directement un e-mail** pré-rempli (choix du 2026-11-06, la fenêtre Gmail/Outlook
+  a été retirée) : série, année, technique, dimensions, prix et description quand ils sont connus. Pas de photo : un
+  lien e-mail ne peut pas joindre d'image. Limite connue : sur un ordinateur sans logiciel de messagerie configuré
+  (cas du poste KLIX), le clic ne fait rien ; l'adresse reste affichée en page Contact.
+- Prints → Etsy (lien à venir), avec un menu des 4 formats par print qui met à jour le prix « dès … » ; un clic sur
+  le cadre agrandit l'œuvre (même fenêtre que la galerie, version `-zoom` filigranée).
 - Goodies → Redbubble (boutique Guiarte SMS).
 
 ## Protection des œuvres (demande de l'artiste, 2026-11-05)
