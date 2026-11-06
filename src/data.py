@@ -12,7 +12,7 @@ LIENS = {
     'redbubble': 'https://www.redbubble.com/people/GuiarteSMS/shop',
     'instagram': 'https://www.instagram.com/guiarteofficial/',
     'tiktok': 'https://www.tiktok.com/@guiarteofficial',
-    'pinterest': 'https://www.pinterest.com/atguiarteofficial/',  # @atguiarteofficial selon les notes, @guiarteofficial selon le book : à confirmer
+    'pinterest': 'https://www.pinterest.com/guiarteofficial/',  # @guiarteofficial, confirmé par KLIX le 2026-11-06
     'youtube': 'https://www.youtube.com/@guiarteofficial',
     'email': 'info@guidodeoliveira.com',
     'newsletter': None,

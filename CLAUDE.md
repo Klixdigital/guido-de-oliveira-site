@@ -55,7 +55,7 @@ directe à l'artiste.
   promos Redbubble). Pas de sac à dos dans sa boutique, contrairement à ses notes. Ancien montage gardé dans
   `source/goodies-ancien-2026-11-05/`. Sa boutique contient aussi du fan art (Star Wars, Iron Man, Shaun le mouton) :
   ne jamais le montrer sur le site (droits de Disney, Marvel, Aardman).
-- **Contact** : info@guidodeoliveira.com ; Instagram, TikTok, YouTube @guiarteofficial ; Pinterest ; pas de Facebook.
+- **Contact** : info@guidodeoliveira.com ; Instagram, TikTok, YouTube, Pinterest @guiarteofficial ; pas de Facebook.
 
 ## État du contenu
 
@@ -67,7 +67,8 @@ directe à l'artiste.
 - Le léopard de l'ancien site (« Leo the leopard » sur Redbubble, « Leo is going out for a walk » dans le book)
   n'est pas dans le dossier des œuvres disponibles : retiré de la galerie.
 - Plus aucune image générée : photo d'atelier = `Mepainting.webp` de l'artiste, vidéo = `Section_a_propos.mp4` (4 s).
-- Traductions NL et EN (intro, bio, FAQ, textes alternatifs) faites par nos soins, à faire valider.
+- Traductions NL et EN (intro, bio, FAQ, textes des œuvres, textes légaux, textes alternatifs) faites par nos soins ;
+  relecture assurée par KLIX (décision du 2026-11-06), pas par l'artiste.
 
 ## Vente (plus d'e-commerce depuis le 2026-11-06)
 
@@ -115,6 +116,5 @@ de l'artiste) et retirer la section temporaire.
 
 Fiche des œuvres (prix, descriptions, histoires, techniques et formats manquants) ; versions HD des 7 petites
 images ; lien Etsy ; service de newsletter ; vidéo de présentation pour l'accueil.
-À trancher : retours 15 jours (FAQ) ou 14 jours (CGV) ; Pinterest @atguiarteofficial (notes) ou @guiarteofficial
-(book) ; la FAQ renvoie à une rubrique actualités qui n'existe pas ; expositions 2017-2019 (FAQ) ou 2020 seulement
+À trancher : retours 15 jours (FAQ) ou 14 jours (CGV) ; la FAQ renvoie à une rubrique actualités qui n'existe pas ; expositions 2017-2019 (FAQ) ou 2020 seulement
 (book, CV) ; galerie « Mundoarti » (book) ou « Munduarti » (CV) ; adresse et numéro d'entreprise pour les CGV.
