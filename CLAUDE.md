@@ -93,6 +93,16 @@ directe à l'artiste.
 - **Clic droit, glisser et appui long bloqués** sur les œuvres (`site.js` + fin de `style.css`). Dissuasif
   seulement : une capture d'écran reste possible, d'où le filigrane. Ne pas présenter ça au client comme infaillible.
 
+## Vidéo de présentation (essais du 2026-11-06, section temporaire dans « À propos »)
+
+Trois versions de ~30 s, `site/assets/video/presentation-v1/2/3.mp4`, affichées l'une sous l'autre (`VIDEO_VERSIONS` dans
+`build.py`) pour choisir. Montées à partir des **œuvres réelles** : chaque toile posée sur un mur de galerie 16:9 (jamais
+recadrée), animée par Higgsfield (Kling 3.0, mouvement de caméra seul), musiques instrumentales ElevenLabs Music,
+cartons logo + « The Art of Guido De Oliveira. ». Clips vérifiés image par image : peintures intactes ; Kling ajoute du
+décor (fenêtre, interrupteur, second cadre). Le clip d'atelier animé déforme le visage de Guido après ~3 s : seul le
+passage 1-3,5 s est gardé (V3), précédé de son vrai clip. Une fois la version choisie : la mettre sur l'accueil (demande
+de l'artiste) et retirer la section temporaire.
+
 ## Règles
 
 - Police **Philosopher** (celle de l'ancien site), via Google Fonts.

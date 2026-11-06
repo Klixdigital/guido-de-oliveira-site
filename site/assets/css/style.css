@@ -437,3 +437,9 @@ a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1p
 .ig-track img { width: 100%; height: 100%; object-fit: contain; }  /* jamais recadré : une publication peut être une œuvre */
 .ig-nav { display: flex; justify-content: flex-end; gap: 1.5rem; margin-top: 1rem; }
 .ig-nav button { padding: 0; border: 0; background: none; font: inherit; color: var(--ink); cursor: pointer; text-decoration: underline; }
+
+/* TEMPORAIRE : versions de la vidéo de présentation (À propos), l'une sous l'autre */
+.vv-list { display: grid; gap: 3.5rem; max-width: 60rem; }
+.vv { margin: 0; }
+.vv figcaption { margin-bottom: 0.9rem; font-size: 1.15rem; }
+.vv figcaption span { color: var(--muted); font-size: 0.95rem; margin-left: 0.5rem; }

@@ -562,7 +562,7 @@ def about(lang):
     </div>
   </div>
 </section>
-
+{video_versions(lang)}
 <section class="section section-wall" id="video">
   <div class="wrap">
     <div class="video-head"><h2>{e(t["video_h"])}</h2><p class="lead">{e(t["video_p"])}</p></div>
@@ -574,6 +574,26 @@ def about(lang):
     return page(lang, 'about', f'{t["a_title"]} | Guido De Oliveira', BIO[lang], body)
 
 
+# TEMPORAIRE (2026-11-06) : 3 versions de la vidéo de présentation, montées avec Higgsfield à partir des œuvres réelles,
+# affichées l'une sous l'autre pour choisir. Retirer cette section une fois la version retenue placée sur l'accueil.
+VIDEO_VERSIONS = [
+    ('presentation-v1.mp4', 'Version 1 · Galerie', 'Piano et cordes, rythme lent'),
+    ('presentation-v2.mp4', 'Version 2 · Cosmos', 'Ambiance électronique, œuvres cosmiques'),
+    ('presentation-v3.mp4', 'Version 3 · Atelier', 'Guitare acoustique, Guido à l’atelier'),
+]
+
+
+def video_versions(lang):
+    items = ''.join(f'''<figure class="vv"><figcaption><strong>{e(name)}</strong> <span>{e(sub)}</span></figcaption>
+  <div class="video-frame"><video src="../assets/video/{f}" controls preload="metadata" playsinline></video></div></figure>'''
+                    for f, name, sub in VIDEO_VERSIONS if (OUT / 'assets' / 'video' / f).exists())
+    if not items:
+        return ''
+    return f'''<section class="section" id="video-versions"><div class="wrap">
+  <div class="section-head"><div><h2>Vidéo de présentation</h2><p class="lead">Trois versions à comparer (section temporaire).</p></div></div>
+  <div class="vv-list">{items}</div></div></section>'''
+
+
 def instagram(lang):
     """« Sur Instagram » (page À propos) : carrousel des dernières publications, rempli par site.js depuis
     LIENS['instagram_feed'] (flux JSON relié au compte de Guido). Sans flux : titre et bouton « Suivre » seuls."""
@@ -582,7 +602,7 @@ def instagram(lang):
     handle = '@' + LIENS['instagram'].rstrip('/').rsplit('/', 1)[-1]
     return f'''<section class="section section-wall" id="instagram">
   <div class="wrap">
-    <div class="section-head"><div><h2>{e(t["ig_h"])}</h2><p class="lead">{e(t["ig_p"])}</p></div><a class="btn btn-line" {ext("instagram", t)}>{e(handle)}</a></div>
+    <div class="section-head"><div><h2>{e(t["ig_h"])}</h2><p class="lead">{e(t["ig_p"])}</p></div><a class="btn" {ext("instagram", t)}>{e(handle)}</a></div>
     <div class="ig" data-ig-feed="{e(feed)}" data-ig-alt="{e(t["ig_alt"])}" hidden>
       <ul class="ig-track"></ul>
       <div class="ig-nav"><button type="button" class="link" data-ig="prev">{e(t["ig_prev"])}</button><button type="button" class="link" data-ig="next">{e(t["ig_next"])}</button></div>
